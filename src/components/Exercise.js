@@ -28,7 +28,7 @@ class Exercise extends Component {
 
     // when delete button is clicked
     deleteExercise = () => {
-        var confirmation = confirm('Are you sure you want to delete this Exercise?');
+        var confirmation = window.confirm('Are you sure you want to delete this Exercise?');
         if(confirmation){
         this.props.onDelete(this.state.id);}
     };
