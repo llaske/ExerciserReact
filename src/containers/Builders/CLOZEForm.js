@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 import {incrementExerciseCounter} from "../../store/actions/increment_counter";
 import {addNewExercise, editExercise} from "../../store/actions/exercises";
 import {FormattedMessage} from 'react-intl';
-import {withRouter} from "react-router-dom"
-import "../../css/CLOZEForm.css"
+import {withRouter} from "react-router-dom";
+import activity from 'lib/sugar-web/activity/activity';
+import "../../css/CLOZEForm.css";
 import {
     FINISH_EXERCISE,
     QUESTION,
@@ -45,7 +46,13 @@ class CLOZEForm extends Component {
                 answers: false,
                 title: false,
                 cloze: false
+<<<<<<< Updated upstream
             }
+=======
+            },
+            typeOfExcercise:'Cloze',
+            picture: ''
+>>>>>>> Stashed changes
         };
     }
 
@@ -201,7 +208,8 @@ class CLOZEForm extends Component {
             clozeText: this.state.clozeText,
             answers: this.state.answers,
             scores: this.state.scores,
-            writeIn: this.state.writeIn
+            writeIn: this.state.writeIn,
+            picture: this.state.picture
         };
 
 
@@ -304,6 +312,64 @@ class CLOZEForm extends Component {
         })
     };
 
+    insertMedia = () => {
+
+        let backend = activity.insertMedia();
+        let chooser = backend.chooser;
+        let datastore = backend.datastore;
+        var outputCanvas = document.getElementById('outputCanvas');
+        let pictureString;
+        // Display journal dialog popup
+        chooser.show(function(entry) {
+            // No selection
+            if (!entry) {
+                return;
+            }
+            // Get object content
+            var dataentry = new datastore.DatastoreObject(entry.objectId);
+            dataentry.loadAsText(function(err, metadata, text) {
+                //We load the drawing inside an image element
+                var element = document.createElement('img');
+                element.src = text;
+                pictureString = text;
+                console.log(pictureString);
+                element.onload = function() {
+                    //We draw the drawing to the canvas
+                    var ctx = outputCanvas.getContext('2d');
+                    var imgWidth = element.width;
+                    var imgHeight = element.height;
+                    var maxWidth = outputCanvas.getBoundingClientRect().width;
+                    var maxHeight = outputCanvas.getBoundingClientRect().height;
+                    var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
+                    var newWidth = ratio * imgWidth;
+                    var newHeight = ratio * imgHeight;
+                    ctx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+                    ctx.drawImage(element, 0, 0, newWidth, newHeight);
+
+                    // /* If the activity is shared we send the element to everyone */
+                    // if (PaintApp.data.isShared) {
+                    //     try {
+                    //         PaintApp.collaboration.sendMessage({
+                    //             action: 'toDataURL',
+                    //             data: {
+                    //                 width: PaintApp.elements.canvas.width / window.devicePixelRatio,
+                    //                 height: PaintApp.elements.canvas.height / window.devicePixelRatio,
+                    //                 src: PaintApp.collaboration.compress(PaintApp.elements.canvas.toDataURL())
+                    //             }
+                    //         });
+                    //     } catch (e) {}
+                    // }
+                }
+            });
+        }, {mimetype: 'image/png'}, {mimetype: 'image/jpeg'});
+            this.setState({
+                ...this.state,
+                picture: pictureString
+            }, () => {
+                console.log(this.state);
+            });
+    }
+
     render() {
         const {errors, answers} = this.state;
         let inputs = answers.map((ans, i) => {
@@ -384,6 +450,12 @@ class CLOZEForm extends Component {
                                     </div>
                                     <div className="row">
                                         <div className="form-group">
+                                            <canvas id="outputCanvas"></canvas>
+                                            <div onClick={this.insertMedia}>Insert Image</div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="form-group">
                                             <label><FormattedMessage id={BLANK_TYPE}/>:</label>
                                             <div className="form-check">
                                                 <input type="radio" name="writeIn"
@@ -408,6 +480,35 @@ class CLOZEForm extends Component {
                                                 <label className="form-check-label">
                                                     <FormattedMessage id={OPTIONS}/>
                                                 </label>
+                                        </div>
+                                    </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <label><FormattedMessage id={BLANK_TYPE}/>:</label>
+                                                <div className="form-check">
+                                                    <input type="radio" name="writeIn"
+                                                        value={"WRITEIN"}
+                                                        checked={this.state.writeIn === "WRITEIN"}
+                                                        required
+                                                        onChange={(e) => {
+                                                            this.setState({writeIn: e.target.value})
+                                                        }}/>
+                                                    <label className="form-check-label">
+                                                        <FormattedMessage id={WRITE_IN}/>
+                                                    </label>
+                                                </div>
+                                                <div className="form-check">
+                                                    <input type="radio" name="writeIn"
+                                                        value={"OPTIONS"}
+                                                        checked={this.state.writeIn === "OPTIONS"}
+                                                        required
+                                                        onChange={(e) => {
+                                                            this.setState({writeIn: e.target.value})
+                                                        }}/>
+                                                    <label className="form-check-label">
+                                                        <FormattedMessage id={OPTIONS}/>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
