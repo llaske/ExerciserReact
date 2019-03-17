@@ -30,7 +30,8 @@ class CLOZEPlayer extends Component {
             times: [],
             goBackToEdit: false,
             currentTime: 0,
-            intervalID: -1
+            intervalID: -1,
+            picture: ''
         }
     }
 
@@ -38,8 +39,7 @@ class CLOZEPlayer extends Component {
     componentDidMount() {
         if (this.props.location.state) {
             let intervalId = setInterval(this.timer, 1000);
-            console.log(this.props.location.state.exercise);
-            const {id, title, question, scores, times, answers, clozeText, writeIn} = this.props.location.state.exercise;
+            const {id, title, question, scores, times, answers, clozeText, writeIn, picture} = this.props.location.state.exercise;
 
             let goBackToEdit = false;
             if (this.props.location.state.edit) goBackToEdit = true;
@@ -81,8 +81,26 @@ class CLOZEPlayer extends Component {
                 intervalId: intervalId,
                 checkans: checkans,
                 writeIn: writeIn,
-                goBackToEdit: goBackToEdit
+                goBackToEdit: goBackToEdit,
+                picture: picture
             })
+        }
+
+        let outputCanvas = document.getElementById('outputCanvas');
+        var element = document.createElement('img');
+        element.src = this.props.location.state.exercise.picture;
+        element.onload = function() {
+            //We draw the drawing to the canvas
+            var ctx = outputCanvas.getContext('2d');
+            var imgWidth = element.width;
+            var imgHeight = element.height;
+            var maxWidth = outputCanvas.getBoundingClientRect().width;
+            var maxHeight = outputCanvas.getBoundingClientRect().height;
+            var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
+            var newWidth = ratio * imgWidth;
+            var newHeight = ratio * imgHeight;
+            ctx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+            ctx.drawImage(element, 0, 0, newWidth, newHeight);
         }
     }
 
@@ -242,6 +260,13 @@ class CLOZEPlayer extends Component {
             }
         });
 
+        let insertImage;
+        if(this.state.picture == '') {
+            insertImage = <canvas style={{display: 'none'}} id="outputCanvas"></canvas>
+        } else {
+            insertImage = <canvas id="outputCanvas"></canvas>
+        }
+
         return (
             <div className="container cloze-container">
                 <div className="row align-items-center justify-content-center">
@@ -250,6 +275,9 @@ class CLOZEPlayer extends Component {
                             <p className="lead">{this.state.title}</p>
                             <hr className="my-4"/>
                             <p>{this.state.question}</p>
+                            <div style={{textAlign: 'center'}}>
+                                {insertImage}
+                            </div>
                             <div>
                                 {clozetext}
                             </div>

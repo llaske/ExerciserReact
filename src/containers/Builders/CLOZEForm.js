@@ -20,7 +20,8 @@ import {
     CLOZE_ERROR,
     ANSWER_ERROR,
     QUESTION_ERROR,
-    TITLE_ERROR
+    TITLE_ERROR,
+    INSERT_IMAGE
 } from "../translation";
 
 class CLOZEForm extends Component {
@@ -46,20 +47,16 @@ class CLOZEForm extends Component {
                 answers: false,
                 title: false,
                 cloze: false
-<<<<<<< Updated upstream
-            }
-=======
             },
             typeOfExcercise:'Cloze',
             picture: ''
->>>>>>> Stashed changes
         };
     }
 
     // in case of edit load the exercise
     componentDidMount() {
         if (this.props.location.state) {
-            const {id, title, question, scores, times, clozeText, answers, writeIn} = this.props.location.state.exercise;
+            const {id, title, question, scores, times, clozeText, answers, writeIn, picture} = this.props.location.state.exercise;
             let nextBlank = answers.length + 1;
 
             this.setState({
@@ -74,8 +71,27 @@ class CLOZEForm extends Component {
                 clozeText: clozeText,
                 answers: answers,
                 writeIn: writeIn,
-                nextBlank: nextBlank
+                nextBlank: nextBlank,
+                picture: picture
             });
+
+            if(this.props.location.state.exercise.picture != null && this.props.location.state.exercise.picture != undefined) {
+                let inputCanvas = document.getElementById('inputCanvas');
+                var element = document.createElement('img');
+                element.src = this.props.location.state.exercise.picture;
+                element.onload = function() {
+                    var ctx = inputCanvas.getContext('2d');
+                    var imgWidth = element.width;
+                    var imgHeight = element.height;
+                    var maxWidth = inputCanvas.getBoundingClientRect().width;
+                    var maxHeight = inputCanvas.getBoundingClientRect().height;
+                    var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
+                    var newWidth = ratio * imgWidth;
+                    var newHeight = ratio * imgHeight;
+                    ctx.clearRect(0, 0, inputCanvas.width, inputCanvas.height);
+                    ctx.drawImage(element, 0, 0, newWidth, newHeight);
+                }
+            }
         }
     }
 
@@ -317,7 +333,7 @@ class CLOZEForm extends Component {
         let backend = activity.insertMedia();
         let chooser = backend.chooser;
         let datastore = backend.datastore;
-        var outputCanvas = document.getElementById('outputCanvas');
+        let inputCanvas = document.getElementById('inputCanvas');
         let pictureString;
         // Display journal dialog popup
         chooser.show(function(entry) {
@@ -332,18 +348,21 @@ class CLOZEForm extends Component {
                 var element = document.createElement('img');
                 element.src = text;
                 pictureString = text;
-                console.log(pictureString);
+                this.setState({
+                            ...this.state,
+                            picture: pictureString
+                        }); 
                 element.onload = function() {
                     //We draw the drawing to the canvas
-                    var ctx = outputCanvas.getContext('2d');
+                    var ctx = inputCanvas.getContext('2d');
                     var imgWidth = element.width;
                     var imgHeight = element.height;
-                    var maxWidth = outputCanvas.getBoundingClientRect().width;
-                    var maxHeight = outputCanvas.getBoundingClientRect().height;
+                    var maxWidth = inputCanvas.getBoundingClientRect().width;
+                    var maxHeight = inputCanvas.getBoundingClientRect().height;
                     var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
                     var newWidth = ratio * imgWidth;
                     var newHeight = ratio * imgHeight;
-                    ctx.clearRect(0, 0, outputCanvas.width, outputCanvas.height);
+                    ctx.clearRect(0, 0, inputCanvas.width, inputCanvas.height);
                     ctx.drawImage(element, 0, 0, newWidth, newHeight);
 
                     // /* If the activity is shared we send the element to everyone */
@@ -360,14 +379,8 @@ class CLOZEForm extends Component {
                     //     } catch (e) {}
                     // }
                 }
-            });
-        }, {mimetype: 'image/png'}, {mimetype: 'image/jpeg'});
-            this.setState({
-                ...this.state,
-                picture: pictureString
-            }, () => {
-                console.log(this.state);
-            });
+            }.bind(this));
+        }.bind(this), {mimetype: 'image/png'}, {mimetype: 'image/jpeg'});
     }
 
     render() {
@@ -413,6 +426,14 @@ class CLOZEForm extends Component {
         if (errors['cloze']) {
             cloze_error = <span style={{color: "red"}}><FormattedMessage id={CLOZE_ERROR}/></span>;
         }
+
+        let insertImage;
+        if(this.state.picture == '') {
+            insertImage = <canvas style={{display: 'none'}} id="inputCanvas"></canvas>
+        } else {
+            insertImage = <canvas id="inputCanvas"></canvas>
+        }
+
         return (
             <div className="container">
                 <div className="container-fluid">
@@ -449,37 +470,11 @@ class CLOZEForm extends Component {
                                         </div>
                                     </div>
                                     <div className="row">
-                                        <div className="form-group">
-                                            <canvas id="outputCanvas"></canvas>
-                                            <div onClick={this.insertMedia}>Insert Image</div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <label><FormattedMessage id={BLANK_TYPE}/>:</label>
-                                            <div className="form-check">
-                                                <input type="radio" name="writeIn"
-                                                       value={"WRITEIN"}
-                                                       checked={this.state.writeIn === "WRITEIN"}
-                                                       required
-                                                       onChange={(e) => {
-                                                           this.setState({writeIn: e.target.value})
-                                                       }}/>
-                                                <label className="form-check-label">
-                                                    <FormattedMessage id={WRITE_IN}/>
-                                                </label>
+                                        <div className="form-group" style={{textAlign: "center"}} >
+                                            {insertImage}
+                                            <div style={{textAlign: "center"}}>
+                                                <button className="btn button-finish" onClick={this.insertMedia}><FormattedMessage id={INSERT_IMAGE}/></button>                                                                                
                                             </div>
-                                            <div className="form-check">
-                                                <input type="radio" name="writeIn"
-                                                       value={"OPTIONS"}
-                                                       checked={this.state.writeIn === "OPTIONS"}
-                                                       required
-                                                       onChange={(e) => {
-                                                           this.setState({writeIn: e.target.value})
-                                                       }}/>
-                                                <label className="form-check-label">
-                                                    <FormattedMessage id={OPTIONS}/>
-                                                </label>
                                         </div>
                                     </div>
                                         <div className="row">
@@ -511,7 +506,6 @@ class CLOZEForm extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     <div className="row">
                                         <div className="form-group">
                                             <div className="cloze row  justify-content-between">

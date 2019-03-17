@@ -9,6 +9,8 @@
     "chart.js": "^2.7.2",
     "html-loader": "^0.5.5",
     "jquery": "^1.9.1",
+    "mustache": "^3.0.1",
+    "picomodal": "^3.0.0",
     "popper.js": "^1.14.3",
     "react": "^16.4.0",
     "react-beautiful-dnd": "^8.0.5",
