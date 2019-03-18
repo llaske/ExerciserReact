@@ -20,6 +20,7 @@ class Scores extends Component {
         this.state = {
             score: true,
             time: false,
+            details: false,
             chartScores: {
                 chartData: {},
                 options: {
@@ -162,7 +163,8 @@ class Scores extends Component {
     score = () => {
         this.setState({
             score: true,
-            time: false
+            time: false,
+            details:false
         }, () => {
             this.setChart();
         })
@@ -171,30 +173,76 @@ class Scores extends Component {
     time = () => {
         this.setState({
             score: false,
-            time: true
+            time: true,
+            details: false
         }, () => {
             this.setChart();
         })
     };
 
+    details = () => {
+        this.setState({
+            score: false,
+            time: false,
+            details: true
+        })
+    };
+
     render() {
+
         let score_active = "";
         let time_active = "";
+        let details_active = "";
 
-        if (this.state.score)
+        if (this.state.score == true)
             score_active = "active";
-        else
+        else if (this.state.time == true)
             time_active = "active";
+        else if (this.state.details == true)
+            details_active = "active";
 
         let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
         let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
+        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
 
         let chart = "";
 
-        if (this.state.score)
+        if (this.state.score == true)
             chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
-        else
+        else if (this.state.time == true)
             chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
+        else if (this.state.details == true) {
+            let questions = this.props.location.state.exercise.clozeText.split(".");
+            questions.splice(-1, 1);
+            let resultDetails = questions.map(function(question, index){
+                question = question.replace("-"+(index+1)+"-", "______");
+                return (
+                    <tr key={index}>
+                        <td className="question-row">{question}</td>
+                        <td>{this.props.location.state.exercise.answers[index]}</td> 
+                        <td>{this.props.location.state.exercise.userans[index]}</td>
+                    </tr>
+                );
+            }.bind(this));
+            chart = (
+            <div>
+                <br></br>
+                <br></br>
+                <table style={{width:'100%'}}>
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Correct Answer</th> 
+                            <th>Your Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {resultDetails}
+                    </tbody> 
+                </table>
+            </div>
+            );
+        }
 
         return (
             <div className="container">
@@ -202,6 +250,7 @@ class Scores extends Component {
                     <div className="row">
                         {score}
                         {time}
+                        {this.props.location.state.type == "CLOZE"?details:''}
                         {chart}
                     </div>
                     <div className="row button-container">

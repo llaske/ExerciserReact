@@ -29,3 +29,14 @@ button{
     flex-direction: row;
     float: right;
 }
+
+th, td {
+    padding: 15px;
+    text-align: center !important;
+    border-bottom: 1px solid #ddd;
+    display: table-cell!important;
+}
+
+.question-row{
+    text-align: left !important;
+}
