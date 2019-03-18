@@ -5,6 +5,7 @@ import {addNewExercise, editExercise} from "../../store/actions/exercises";
 import {FormattedMessage} from 'react-intl';
 import {withRouter} from "react-router-dom";
 import activity from 'lib/sugar-web/activity/activity';
+import env from 'lib/sugar-web/env';
 import "../../css/CLOZEForm.css";
 import {
     FINISH_EXERCISE,
@@ -330,58 +331,63 @@ class CLOZEForm extends Component {
 
     insertMedia = () => {
 
-        let backend = activity.insertMedia();
-        let chooser = backend.chooser;
-        let datastore = backend.datastore;
-        let inputCanvas = document.getElementById('inputCanvas');
-        let pictureString;
-        // Display journal dialog popup
-        chooser.show(function(entry) {
-            // No selection
-            if (!entry) {
-                return;
-            }
-            // Get object content
-            var dataentry = new datastore.DatastoreObject(entry.objectId);
-            dataentry.loadAsText(function(err, metadata, text) {
-                //We load the drawing inside an image element
-                var element = document.createElement('img');
-                element.src = text;
-                pictureString = text;
-                this.setState({
-                            ...this.state,
-                            picture: pictureString
-                        }); 
-                element.onload = function() {
-                    //We draw the drawing to the canvas
-                    var ctx = inputCanvas.getContext('2d');
-                    var imgWidth = element.width;
-                    var imgHeight = element.height;
-                    var maxWidth = inputCanvas.getBoundingClientRect().width;
-                    var maxHeight = inputCanvas.getBoundingClientRect().height;
-                    var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
-                    var newWidth = ratio * imgWidth;
-                    var newHeight = ratio * imgHeight;
-                    ctx.clearRect(0, 0, inputCanvas.width, inputCanvas.height);
-                    ctx.drawImage(element, 0, 0, newWidth, newHeight);
+        env.getEnvironment(function (err, environment) {
+            
+            if(environment.user!=undefined) {
+                let backend = activity.insertMedia();
+                let chooser = backend.chooser;
+                let datastore = backend.datastore;
+                let inputCanvas = document.getElementById('inputCanvas');
+                let pictureString;
+                // Display journal dialog popup
+                chooser.show(function(entry) {
+                    // No selection
+                    if (!entry) {
+                        return;
+                    }
+                    // Get object content
+                    var dataentry = new datastore.DatastoreObject(entry.objectId);
+                    dataentry.loadAsText(function(err, metadata, text) {
+                        //We load the drawing inside an image element
+                        var element = document.createElement('img');
+                        element.src = text;
+                        pictureString = text;
+                        this.setState({
+                                    ...this.state,
+                                    picture: pictureString
+                                }); 
+                        element.onload = function() {
+                            //We draw the drawing to the canvas
+                            var ctx = inputCanvas.getContext('2d');
+                            var imgWidth = element.width;
+                            var imgHeight = element.height;
+                            var maxWidth = inputCanvas.getBoundingClientRect().width;
+                            var maxHeight = inputCanvas.getBoundingClientRect().height;
+                            var ratio = Math.min(maxWidth / imgWidth, maxHeight / imgHeight);
+                            var newWidth = ratio * imgWidth;
+                            var newHeight = ratio * imgHeight;
+                            ctx.clearRect(0, 0, inputCanvas.width, inputCanvas.height);
+                            ctx.drawImage(element, 0, 0, newWidth, newHeight);
 
-                    // /* If the activity is shared we send the element to everyone */
-                    // if (PaintApp.data.isShared) {
-                    //     try {
-                    //         PaintApp.collaboration.sendMessage({
-                    //             action: 'toDataURL',
-                    //             data: {
-                    //                 width: PaintApp.elements.canvas.width / window.devicePixelRatio,
-                    //                 height: PaintApp.elements.canvas.height / window.devicePixelRatio,
-                    //                 src: PaintApp.collaboration.compress(PaintApp.elements.canvas.toDataURL())
-                    //             }
-                    //         });
-                    //     } catch (e) {}
-                    // }
-                }
-            }.bind(this));
-        }.bind(this), {mimetype: 'image/png'}, {mimetype: 'image/jpeg'});
-    }
+                            // /* If the activity is shared we send the element to everyone */
+                            // if (PaintApp.data.isShared) {
+                            //     try {
+                            //         PaintApp.collaboration.sendMessage({
+                            //             action: 'toDataURL',
+                            //             data: {
+                            //                 width: PaintApp.elements.canvas.width / window.devicePixelRatio,
+                            //                 height: PaintApp.elements.canvas.height / window.devicePixelRatio,
+                            //                 src: PaintApp.collaboration.compress(PaintApp.elements.canvas.toDataURL())
+                            //             }
+                            //         });
+                            //     } catch (e) {}
+                            // }
+                        }
+                    }.bind(this));
+                }.bind(this), {mimetype: 'image/png'}, {mimetype: 'image/jpeg'});
+            }
+        }.bind(this))
+    };
 
     render() {
         const {errors, answers} = this.state;
