@@ -110,7 +110,7 @@ class ExerciseList extends Component {
             stroke = current_user.colorvalue.stroke;
             fill = current_user.colorvalue.fill;
         }
-        let styles = {"background-color": fill};
+        let styles = {"backgroundColor": fill};
 
         let userIcon="";
 

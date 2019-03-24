@@ -3,7 +3,13 @@ export const QUESTIONS="{number} Questions";
 export const TYPE="Type";
 export const BEST_SCORE="Best Score";
 export const QUESTION_SINGULAR="{number} Question";
+<<<<<<< HEAD
 export const INSERT_IMAGE="Insert Image";
+=======
+export const PLAY="Play";
+export const EDIT="Edit";
+export const DELETE="Delete";
+>>>>>>> 828b523fb782f8dbfcfbecaf9b4683a0ab54ad7c
 
 // TEMPLATE VIEW
 export const MCQ_TEMPLATE_STRING= "Build an exercise with questions and option choices.";
