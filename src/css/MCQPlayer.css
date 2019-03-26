@@ -1,52 +1,49 @@
-.form-group{
-    /*margin-top: 20px;*/
-}
-
-.choices-div{
+.choices-div {
     display: inline-block;
     width: 100%;
 }
 
-.choices-button{
+.choices-button {
     width: 100%;
 }
 
-.choices-div{
-    width: 100%!important;
+.choices-div {
+    width: 100% !important;
     min-width: 350px;
-    display: inline-block!important;
+    display: inline-block !important;
     margin: 10px;
 }
 
-.choices-row{
+.choices-row {
     display: inline-block;
 }
 
 @media (min-width: 576px) {
     .jumbotron {
-        padding: 2rem 1rem!important;
+        padding: 2rem 1rem !important;
     }
 }
 
-.jumbotron{
-    margin-bottom: 1rem!important;
-    background-color: #dfdfdf!important;
+.jumbotron {
+    margin-bottom: 1rem !important;
+    background-color: #dfdfdf !important;
 }
 
-.d-flex{
+.d-flex {
     margin-top: 1rem;
 }
 
-.next-button{
+.next-button {
     width: 180px;
     text-align: center;
+    -ms-flex-item-align: center;
     align-self: center;
-    border-radius: 20px!important;
-    font-size: 15px!important;
+    border-radius: 20px !important;
+    font-size: 15px !important;
 }
 
-.mcq-container{
-    margin-top: 5%!important;
+.mcq-container {
+    margin-top: 5% !important;
 }
 
 .lead {

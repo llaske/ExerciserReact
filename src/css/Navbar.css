@@ -52,8 +52,14 @@
     border-radius: 5.5px;
 }
 
-.toolbar{
+.toolbar {
     position: fixed;
     z-index: 1000;
     width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .toolbar {
+        padding: 2px;
+    }
 }
