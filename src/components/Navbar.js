@@ -33,6 +33,14 @@ class Navbar extends Component {
         let addTitle= intl.formatMessage({id: ADD_EXERCISE});
         let networkTitle= intl.formatMessage({id: NETWORK});
         let stopTitle= intl.formatMessage({id: STOP});
+        let buttonId = "home-button";
+        let buttonOnClick = this.directToHome;
+        let buttonTitle = homeTitle;
+        if (this.props.location.pathname === "/") {
+            buttonId = "add-button";
+            buttonOnClick = this.directToNew;
+            buttonTitle = addTitle;
+        }
 
         return (
             <div id="main-toolbar" className="toolbar">
@@ -42,14 +50,9 @@ class Navbar extends Component {
                     title={activityTitle}/>
                 <button
                     className="toolbutton"
-                    id="home-button"
-                    title={homeTitle}
-                    onClick={this.directToHome}/>
-                <button
-                    className="toolbutton"
-                    id="add-button"
-                    title={addTitle}
-                    onClick={this.directToNew}/>
+                    id={buttonId}
+                    title={buttonTitle}
+                    onClick={buttonOnClick}/>
                 <button
                     className="toolbutton"
                     id="network-button"
