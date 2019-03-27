@@ -16,11 +16,14 @@ class Scores extends Component {
 
         let {intl} = this.props;
         this.intl = intl;
+        this.modes = {
+            SCORE: 'score',
+            TIME: 'time',
+            DETAILS: 'details'
+        };
 
         this.state = {
-            score: true,
-            time: false,
-            details: false,
+            mode: this.modes.SCORE,
             chartScores: {
                 chartData: {},
                 options: {
@@ -162,9 +165,7 @@ class Scores extends Component {
 
     score = () => {
         this.setState({
-            score: true,
-            time: false,
-            details:false
+            mode: this.modes.SCORE
         }, () => {
             this.setChart();
         })
@@ -172,9 +173,7 @@ class Scores extends Component {
 
     time = () => {
         this.setState({
-            score: false,
-            time: true,
-            details: false
+            mode: this.modes.TIME
         }, () => {
             this.setChart();
         })
@@ -182,9 +181,7 @@ class Scores extends Component {
 
     details = () => {
         this.setState({
-            score: false,
-            time: false,
-            details: true
+            mode: this.modes.DETAILS
         })
     };
 
@@ -193,28 +190,22 @@ class Scores extends Component {
         let score_active = "";
         let time_active = "";
         let details_active = "";
-
-        if (this.state.score == true)
-            score_active = "active";
-        else if (this.state.time == true)
-            time_active = "active";
-        else if (this.state.details == true)
-            details_active = "active";
-
-        let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
-        let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
-        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
-
         let chart = "";
 
-        if (this.state.score == true)
+        if (this.state.mode == 'score'){
+            score_active = "active";
             chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
-        else if (this.state.time == true)
+        }
+        else if (this.state.mode == 'time') {
+            time_active = "active";
             chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
-        else if (this.state.details == true) {
+        }
+        else if (this.state.mode == 'details') {
+            details_active = "active";
+            
             let questions = this.props.location.state.exercise.clozeText.split(".");
             questions.splice(-1, 1);
-            let resultDetails = questions.map(function(question, index){
+            let resultDetails = questions.map((question, index) => {
                 question = question.replace("-"+(index+1)+"-", "______");
                 return (
                     <tr key={index}>
@@ -223,12 +214,13 @@ class Scores extends Component {
                         <td>{this.props.location.state.exercise.userans[index]}</td>
                     </tr>
                 );
-            }.bind(this));
+            });
+
             chart = (
             <div>
                 <br></br>
                 <br></br>
-                <table style={{width:'100%'}}>
+                <table className="w-100">
                     <thead>
                         <tr>
                             <th>Question</th>
@@ -242,7 +234,12 @@ class Scores extends Component {
                 </table>
             </div>
             );
+        
         }
+
+        let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
+        let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
+        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
 
         return (
             <div className="container">

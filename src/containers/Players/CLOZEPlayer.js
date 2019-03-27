@@ -155,10 +155,10 @@ class CLOZEPlayer extends Component {
 
     // redirect to scores screen/ edit screen
     finishExercise = () => {
-        const {scores, score, id, currentTime, times, answers, goBackToEdit} = this.state;
+        const {scores, score, id, currentTime, times, answers, goBackToEdit, userans} = this.state;
         let exercise = {
             ...this.props.location.state.exercise,
-            userans: this.state.userans
+            userans: userans
         };
         let noOfQuestions = answers.length;
 
