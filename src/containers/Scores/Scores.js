@@ -192,15 +192,15 @@ class Scores extends Component {
         let details_active = "";
         let chart = "";
 
-        if (this.state.mode == 'score'){
+        if (this.state.mode == this.modes.SCORE){
             score_active = "active";
             chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
         }
-        else if (this.state.mode == 'time') {
+        else if (this.state.mode == this.modes.TIME) {
             time_active = "active";
             chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
         }
-        else if (this.state.mode == 'details') {
+        else if (this.state.mode == this.modes.DETAILS) {
             details_active = "active";
             
             let questions = this.props.location.state.exercise.clozeText.split(".");
