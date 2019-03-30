@@ -109,7 +109,7 @@ class Scores extends Component {
         let time = Math.ceil(userTime / 60);
 
         if (this.props.isShared) {
-            this.props.onSharedResult(exercise.id, score, time);
+            this.props.onSharedResult(exercise.id, score, time, exercise.userans);
         }
         const {name} = this.props.current_user;
 

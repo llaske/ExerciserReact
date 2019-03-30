@@ -18,6 +18,7 @@ class PresenceScores extends Component {
         this.state = {
             score: true,
             time: false,
+            details: false,
             chartScores: {
                 chartData: {},
                 options: {
@@ -189,8 +190,9 @@ class PresenceScores extends Component {
     score = () => {
         this.setState({
             score: true,
-            time: false
-        },()=>{
+            time: false,
+            details:false
+        }, () => {
             this.setChart();
         })
     };
@@ -198,40 +200,109 @@ class PresenceScores extends Component {
     time = () => {
         this.setState({
             score: false,
-            time: true
-        },()=>{
+            time: true,
+            details: false
+        }, () => {
             this.setChart();
         })
     };
 
-    render() {
+    details = () => {
+        this.setState({
+            score: false,
+            time: false,
+            details: true
+        })
+    };
 
+    render() {
         let score_active = "";
         let time_active = "";
+        let details_active = "";
 
-        if (this.state.score)
+        if (this.state.score == true)
             score_active = "active";
-        else
+        else if (this.state.time == true)
             time_active = "active";
+        else if (this.state.details == true)
+            details_active = "active";
 
         let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
         let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
+        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
 
-        let chart="";
 
-        if(this.state.score)
-            chart= (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
-        else
-            chart= (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
+        const {exercise} = this.props.location.state;
+        const {shared_results} = exercise;
+        let users = [];
+        let userans = [];
+        shared_results.map((result, index) => {
+            users.push(result.user.name);
+            userans.push(result.userans);
+        });
+
+        let chart = "";
+
+        if (this.state.score == true)
+            chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
+        else if (this.state.time == true)
+            chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
+        else if (this.state.details == true) {
+            
+            users = users.map(function(user, index){
+                return (<th key={index}>{user}</th>);
+            });
+            
+            let questions = this.props.location.state.exercise.clozeText.split(".");
+            questions.splice(-1, 1);
+            let resultDetails = questions.map(function(question, index){
+                question = question.replace("-"+(index+1)+"-", "______");
+                let eachQuestionResponses = userans.map(function(userans){
+                    return (
+                        <td>{userans[index]}</td>
+                    );
+                })
+                return (
+                    <tr key={index}>
+                        <td className="question-row">{question}</td>
+                        <td>{this.props.location.state.exercise.answers[index]}</td> 
+                        {eachQuestionResponses}
+                    </tr>
+                );
+            }.bind(this));
+
+            chart = (
+            <div>
+                <br></br>
+                <br></br>
+                <table style={{width:'100%'}}>
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Correct Answer</th> 
+                            {users}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {resultDetails}
+                    </tbody> 
+                </table>
+            </div>
+            );
+        }
 
         return (
             <div className="container">
                 <div className="container-fluid">
-                <div className="row">
-                    {score}
-                    {time}
-                    {chart}
-                </div>
+                    <div className="row">
+                        {score}
+                        {time}
+                        {this.props.location.state.exercise.type == "CLOZE"?details:''}
+                        {chart}
+                    </div>
+                    <div className="row button-container">
+                        <button className="button-redo" onClick={this.redo}/>
+                    </div>
                 </div>
             </div>
         )
