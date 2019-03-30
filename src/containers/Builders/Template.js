@@ -32,7 +32,7 @@ class Template extends Component {
     };
 ;
     render() {
-        let styles = { "background-color": this.props.current_user.colorvalue ? this.props.current_user.colorvalue.stroke : "#FFFFFF" };
+        let styles = { "backgroundColor": this.props.current_user.colorvalue ? this.props.current_user.colorvalue.stroke : "#FFFFFF" };
         return (
             <div className="template-container" style={styles}>
                 <div className="col-md-10 mx-auto">

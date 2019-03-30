@@ -45,7 +45,8 @@ class CLOZEForm extends Component {
                 answers: false,
                 title: false,
                 cloze: false
-            }
+            },
+            typeOfExcercise:'Cloze'
         };
     }
 
@@ -352,131 +353,135 @@ class CLOZEForm extends Component {
                 <div className="container-fluid">
                     <div className="row align-items-center justify-content-center">
                         <div className="col-sm-10">
-                            <div className="col-md-12">
-                                <form onSubmit={this.handleNewEvent}>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <label htmlFor="title"><FormattedMessage id={TITLE_OF_EXERCISE}/></label>
-                                            <input
-                                                className="input-mcq"
-                                                type="text"
-                                                id="title"
-                                                required
-                                                value={this.state.title}
-                                                onChange={this.handleChangeTitle}
-                                            />
-                                            {title_error}
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <label htmlFor="question"><FormattedMessage id={QUESTION}/>:</label>
-                                            <input
-                                                className="input-mcq"
-                                                type="text"
-                                                id="question"
-                                                required
-                                                value={this.state.question}
-                                                onChange={this.handleChangeQues}
-                                            />
-                                            {question_error}
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <label><FormattedMessage id={BLANK_TYPE}/>:</label>
-                                            <div className="form-check">
-                                                <input type="radio" name="writeIn"
-                                                       value={"WRITEIN"}
-                                                       checked={this.state.writeIn === "WRITEIN"}
-                                                       required
-                                                       onChange={(e) => {
-                                                           this.setState({writeIn: e.target.value})
-                                                       }}/>
-                                                <label className="form-check-label">
-                                                    <FormattedMessage id={WRITE_IN}/>
-                                                </label>
-                                            </div>
-                                            <div className="form-check">
-                                                <input type="radio" name="writeIn"
-                                                       value={"OPTIONS"}
-                                                       checked={this.state.writeIn === "OPTIONS"}
-                                                       required
-                                                       onChange={(e) => {
-                                                           this.setState({writeIn: e.target.value})
-                                                       }}/>
-                                                <label className="form-check-label">
-                                                    <FormattedMessage id={OPTIONS}/>
-                                                </label>
+                            <div>
+                            <p><strong><FormattedMessage id={CLOZE_TEXT}/></strong></p>
+                            <hr className="my-3"/>
+                                <div className="col-md-12">
+                                    <form onSubmit={this.handleNewEvent}>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <label htmlFor="title"><FormattedMessage id={TITLE_OF_EXERCISE}/></label>
+                                                <input
+                                                    className="input-mcq"
+                                                    type="text"
+                                                    id="title"
+                                                    required
+                                                    value={this.state.title}
+                                                    onChange={this.handleChangeTitle}
+                                                />
+                                                {title_error}
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <div className="cloze row  justify-content-between">
-                                                <label htmlFor="cloze-text"><FormattedMessage id={CLOZE_TEXT}/>:</label>
-                                                <div className="justify-content-end">
-                                                    <button
-                                                        onClick={this.addBlank}
-                                                        className={"btn button-finish"}
-                                                    >
-                                                        <FormattedMessage id={ADD_BLANK}/>
-                                                    </button>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <label htmlFor="question"><FormattedMessage id={QUESTION}/>:</label>
+                                                <input
+                                                    className="input-mcq"
+                                                    type="text"
+                                                    id="question"
+                                                    required
+                                                    value={this.state.question}
+                                                    onChange={this.handleChangeQues}
+                                                />
+                                                {question_error}
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <label><FormattedMessage id={BLANK_TYPE}/>:</label>
+                                                <div className="form-check">
+                                                    <input type="radio" name="writeIn"
+                                                        value={"WRITEIN"}
+                                                        checked={this.state.writeIn === "WRITEIN"}
+                                                        required
+                                                        onChange={(e) => {
+                                                            this.setState({writeIn: e.target.value})
+                                                        }}/>
+                                                    <label className="form-check-label">
+                                                        <FormattedMessage id={WRITE_IN}/>
+                                                    </label>
+                                                </div>
+                                                <div className="form-check">
+                                                    <input type="radio" name="writeIn"
+                                                        value={"OPTIONS"}
+                                                        checked={this.state.writeIn === "OPTIONS"}
+                                                        required
+                                                        onChange={(e) => {
+                                                            this.setState({writeIn: e.target.value})
+                                                        }}/>
+                                                    <label className="form-check-label">
+                                                        <FormattedMessage id={OPTIONS}/>
+                                                    </label>
                                                 </div>
                                             </div>
-                                            <textarea
-                                                className="input-mcq"
-                                                rows="5"
-                                                id="cloze-text"
-                                                required
-                                                onKeyDown={this.handleKeyDown}
-                                                onBlur={this.handleMouseDown}
-                                                value={this.state.clozeText}
-                                                onChange={this.handleChangeCloze}
-                                            />
-                                            {cloze_error}
                                         </div>
-                                    </div>
-                                    {inputs}
-                                    <div>
-                                        {answer_error}
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group">
-                                            <button
-                                                type="button"
-                                                onClick={this.handleNewAns}
-                                                className="btn button-choices-add">
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <div className="cloze row  justify-content-between">
+                                                    <label htmlFor="cloze-text"><FormattedMessage id={CLOZE_TEXT}/>:</label>
+                                                    <div className="justify-content-end">
+                                                        <button
+                                                            onClick={this.addBlank}
+                                                            className={"btn button-finish"}
+                                                        >
+                                                            <FormattedMessage id={ADD_BLANK}/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <textarea
+                                                    className="input-mcq"
+                                                    rows="5"
+                                                    id="cloze-text"
+                                                    required
+                                                    onKeyDown={this.handleKeyDown}
+                                                    onBlur={this.handleMouseDown}
+                                                    value={this.state.clozeText}
+                                                    onChange={this.handleChangeCloze}
+                                                />
+                                                {cloze_error}
+                                            </div>
+                                        </div>
+                                        {inputs}
+                                        <div>
+                                            {answer_error}
+                                        </div>
+                                        <div className="row">
+                                            <div className="form-group">
+                                                <button
+                                                    type="button"
+                                                    onClick={this.handleNewAns}
+                                                    className="btn button-choices-add">
 
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={this.handleRemoveAns}
-                                                className="btn button-choices-sub">
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    onClick={this.handleRemoveAns}
+                                                    className="btn button-choices-sub">
 
-                                            </button>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="form-group row justify-content-between">
-                                        <br/>
-                                        <div className="justify-content-end">
-                                            <button
-                                                onClick={(e) => this.submitExercise(false, e)}
-                                                className={"btn button-finish"}
-                                                disabled={!this.state.isFormValid}
-                                            >
-                                                <FormattedMessage id={FINISH_EXERCISE}/>
-                                            </button>
-                                            <button
-                                                onClick={(e) => this.submitExercise(true, e)}
-                                                className={"btn button-finish"}
-                                                disabled={!this.state.isFormValid}
-                                            >
-                                                <FormattedMessage id={TEST_EXERCISE}/>
-                                            </button>
+                                        <div className="form-group row justify-content-between">
+                                            <br/>
+                                            <div className="justify-content-end">
+                                                <button
+                                                    onClick={(e) => this.submitExercise(false, e)}
+                                                    className={"btn button-finish"}
+                                                    disabled={!this.state.isFormValid}
+                                                >
+                                                    <FormattedMessage id={FINISH_EXERCISE}/>
+                                                </button>
+                                                <button
+                                                    onClick={(e) => this.submitExercise(true, e)}
+                                                    className={"btn button-finish"}
+                                                    disabled={!this.state.isFormValid}
+                                                >
+                                                    <FormattedMessage id={TEST_EXERCISE}/>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ import {
     TEST_EXERCISE,
     QUESTION_ERROR,
     ITEM,
-    LIST_ERROR, TITLE_ERROR,
+    LIST_ERROR, TITLE_ERROR, REORDER_LIST,
 } from "../translation";
 
 class REORDERForm extends Component {
@@ -255,6 +255,9 @@ class REORDERForm extends Component {
                 <div className="container-fluid">
                     <div className="row align-items-center justify-content-center">
                         <div className="col-sm-10">
+                        <div>
+                        <p><strong><FormattedMessage id={REORDER_LIST}/></strong></p>
+                            <hr className="my-3"/>
                             <div className="col-md-12">
                                 <form onSubmit={this.handleNewEvent}>
                                     <div className="row">
@@ -326,10 +329,12 @@ class REORDERForm extends Component {
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         )
     }
 

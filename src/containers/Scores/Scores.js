@@ -97,6 +97,12 @@ class Scores extends Component {
 
     componentDidMount() {
         if (this.props.location) {
+            const {userScore, userTime, noOfQuestions, exercise} = this.props.location.state;
+            let score = Math.ceil(userScore / noOfQuestions * 100);
+            let time = Math.ceil(userTime / 60);
+            if (this.props.isShared) {
+                this.props.onSharedResult(exercise.id, score, time, exercise.userans);
+            }
             this.setChart();
         }
     }
@@ -108,9 +114,6 @@ class Scores extends Component {
         let score = Math.ceil(userScore / noOfQuestions * 100);
         let time = Math.ceil(userTime / 60);
 
-        if (this.props.isShared) {
-            this.props.onSharedResult(exercise.id, score, time, exercise.userans);
-        }
         const {name} = this.props.current_user;
 
         this.setState({

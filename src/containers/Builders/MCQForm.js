@@ -14,7 +14,8 @@ import {
     TEST_EXERCISE,
     TITLE_ERROR,
     QUESTION_ERROR,
-    ANSWER_ERROR
+    ANSWER_ERROR,
+    MCQ
 } from "../translation";
 import {withRouter} from "react-router-dom"
 import "../../css/MCQForm.css"
@@ -361,96 +362,100 @@ class MCQForm extends Component {
             <div className="container-fluid">
                 <div className="row align-items-center justify-content-center">
                     <div className="col-sm-10">
-                        <div className="col-md-12">
-                            <form onSubmit={this.handleNewEvent}>
-                                <div className="row">
-                                    <div className="form-group">
-                                        <label htmlFor="title"><FormattedMessage id={TITLE_OF_EXERCISE}/></label>
-                                        <input
-                                            className="input-mcq"
-                                            type="text"
-                                            id="title"
-                                            required
-                                            value={this.state.title}
-                                            onChange={this.handleChangeTitle}
-                                        />
-                                        {title_error}
+                        <div>
+                            <p><strong><FormattedMessage id={MCQ}/></strong></p>
+                            <hr className="my-3"/>
+                            <div className="col-md-12">
+                                <form onSubmit={this.handleNewEvent}>
+                                    <div className="row">
+                                        <div className="form-group">
+                                            <label htmlFor="title"><FormattedMessage id={TITLE_OF_EXERCISE}/></label>
+                                            <input
+                                                className="input-mcq"
+                                                type="text"
+                                                id="title"
+                                                required
+                                                value={this.state.title}
+                                                onChange={this.handleChangeTitle}
+                                            />
+                                            {title_error}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="row">
-                                    <div className="form-group">
-                                        <label htmlFor="question">{id}. <FormattedMessage id={QUESTION}/>:</label>
-                                        <input
-                                            className="input-mcq"
-                                            type="text"
-                                            id="question"
-                                            required
-                                            value={this.state.currentQuestion.question}
-                                            onChange={this.handleChangeQues}
-                                        />
-                                        {question_error}
+                                    <div className="row">
+                                        <div className="form-group">
+                                            <label htmlFor="question">{id}. <FormattedMessage id={QUESTION}/>:</label>
+                                            <input
+                                                className="input-mcq"
+                                                type="text"
+                                                id="question"
+                                                required
+                                                value={this.state.currentQuestion.question}
+                                                onChange={this.handleChangeQues}
+                                            />
+                                            {question_error}
+                                        </div>
                                     </div>
-                                </div>
-                                {inputs}
-                                <div>
-                                    {answer_error}
-                                </div>
-                                <div className="row">
-                                    <div className="form-group">
-                                        <button
-                                            type="button"
-                                            onClick={this.handleNewAns}
-                                            className="btn button-choices-add">
+                                    {inputs}
+                                    <div>
+                                        {answer_error}
+                                    </div>
+                                    <div className="row">
+                                        <div className="form-group">
+                                            <button
+                                                type="button"
+                                                onClick={this.handleNewAns}
+                                                className="btn button-choices-add">
 
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={this.handleRemoveAns}
-                                            className="btn button-choices-sub">
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={this.handleRemoveAns}
+                                                className="btn button-choices-sub">
 
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-group row justify-content-between">
-                                    <button
-                                        onClick={this.previousQues}
-                                        className={"btn button-previous"}
-                                        disabled={this.state.currentQuestionNo === 1}
-                                    >
-                                        <FormattedMessage id={PREVIOUS_QUESTION}/>
-                                    </button>
-                                    <div className="justify-content-end">
+                                    <div className="form-group row justify-content-between">
                                         <button
-                                            onClick={this.saveCurrentForm}
-                                            className={"btn button-next"}
-                                            disabled={!this.state.isFormValid}
+                                            onClick={this.previousQues}
+                                            className={"btn button-previous"}
+                                            disabled={this.state.currentQuestionNo === 1}
                                         >
-                                            <FormattedMessage id={NEXT_QUESTION}/>
+                                            <FormattedMessage id={PREVIOUS_QUESTION}/>
+                                        </button>
+                                        <div className="justify-content-end">
+                                            <button
+                                                onClick={this.saveCurrentForm}
+                                                className={"btn button-next"}
+                                                disabled={!this.state.isFormValid}
+                                            >
+                                                <FormattedMessage id={NEXT_QUESTION}/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="form-group row justify-content-between">
+                                        <button
+                                            onClick={(e)=>this.submitExercise(false,e)}
+                                            className={"btn button-finish"}
+                                            disabled={!this.state.noOfQuestions >= 1}
+                                        >
+                                            <FormattedMessage id={FINISH_EXERCISE}/>
+                                        </button>
+                                        <button
+                                            onClick={(e)=> this.submitExercise(true,e)}
+                                            className={"btn button-finish"}
+                                            disabled={!this.state.noOfQuestions >= 1}
+                                        >
+                                            <FormattedMessage id={TEST_EXERCISE}/>
                                         </button>
                                     </div>
-                                </div>
-                                <div className="form-group row justify-content-between">
-                                    <button
-                                        onClick={(e)=>this.submitExercise(false,e)}
-                                        className={"btn button-finish"}
-                                        disabled={!this.state.noOfQuestions >= 1}
-                                    >
-                                        <FormattedMessage id={FINISH_EXERCISE}/>
-                                    </button>
-                                    <button
-                                        onClick={(e)=> this.submitExercise(true,e)}
-                                        className={"btn button-finish"}
-                                        disabled={!this.state.noOfQuestions >= 1}
-                                    >
-                                        <FormattedMessage id={TEST_EXERCISE}/>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                                </form>
+                            </div>
+                        </div>    
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         )
     }
 
