@@ -297,13 +297,13 @@ class REORDERForm extends Component {
                                             <button
                                                 type="button"
                                                 onClick={this.handleNewAns}
-                                                className="btn button-choices-add">
+                                                className="button-choices-add">
 
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={this.handleRemoveAns}
-                                                className="btn button-choices-sub">
+                                                className="button-choices-sub">
 
                                             </button>
                                         </div>
