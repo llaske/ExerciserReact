@@ -404,13 +404,13 @@ class MCQForm extends Component {
                                             <button
                                                 type="button"
                                                 onClick={this.handleNewAns}
-                                                className="btn button-choices-add">
+                                                className="button button-choices-add">
 
                                             </button>
                                             <button
                                                 type="button"
                                                 onClick={this.handleRemoveAns}
-                                                className="btn button-choices-sub">
+                                                className="button button-choices-sub">
 
                                             </button>
                                         </div>
