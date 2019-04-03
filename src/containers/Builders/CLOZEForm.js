@@ -174,6 +174,18 @@ class CLOZEForm extends Component {
             }
         });
 
+        const next_blank = this.findNextBlank(this.state.clozeText);
+
+        for (let i = 1; i < next_blank; i++) {
+            if (this.state.answers.length <= i - 1 || this.state.answers[i - 1].length === 0) {
+                isFormValid = false;
+            }
+        }
+
+        if (next_blank - 1 !== this.state.answers.length) {
+            isFormValid = false;
+        }
+
         this.setState({
             ...this.state,
             isFormValid: isFormValid
