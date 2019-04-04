@@ -21,7 +21,7 @@ class Scores extends Component {
             TIME: 'time',
             DETAILS: 'details'
         };
-
+        
         this.state = {
             mode: this.modes.SCORE,
             chartScores: {
@@ -182,30 +182,32 @@ class Scores extends Component {
         })
     };
 
-    details = () => {
-        this.setState({
-            mode: this.modes.DETAILS
-        })
+    details = (event) => {
+        if(event.length!=0) {
+            if(this.props.location.state.type == 'CLOZE'){
+                this.setState({
+                    mode: this.modes.DETAILS
+                })
+            }
+        }
     };
 
     render() {
 
         let score_active = "";
         let time_active = "";
-        let details_active = "";
         let chart = "";
 
         if (this.state.mode == this.modes.SCORE){
             score_active = "active";
-            chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
+            chart = (<Bar data={this.state.chartScores.chartData} getElementAtEvent={this.details} options={this.state.chartScores.options}/>);
         }
         else if (this.state.mode == this.modes.TIME) {
             time_active = "active";
             chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
         }
         else if (this.state.mode == this.modes.DETAILS) {
-            details_active = "active";
-            
+                      
             let questions = this.props.location.state.exercise.clozeText.split(".");
             questions.splice(-1, 1);
             let resultDetails = questions.map((question, index) => {
@@ -242,7 +244,6 @@ class Scores extends Component {
 
         let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
         let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
-        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
 
         return (
             <div className="container">
@@ -250,7 +251,6 @@ class Scores extends Component {
                     <div className="row">
                         {score}
                         {time}
-                        {this.props.location.state.type == "CLOZE"?details:''}
                         {chart}
                     </div>
                     <div className="row button-container">

@@ -14,11 +14,15 @@ class PresenceScores extends Component {
 
         let {intl} = this.props;
         this.intl = intl;
-
+        this.modes = {
+            SCORE: 'score',
+            TIME: 'time',
+            DETAILS: 'details'
+        };
+        
         this.state = {
-            score: true,
-            time: false,
-            details: false,
+            mode: this.modes.SCORE,
+            userDetailsIndex: 0,
             chartScores: {
                 chartData: {},
                 options: {
@@ -146,7 +150,7 @@ class PresenceScores extends Component {
             times.push(result.time);
         });
 
-        if(score) {
+        if(this.state.mode == this.modes.SCORE) {
             this.setState({
                 ...this.state,
                 chartScores: {
@@ -165,7 +169,7 @@ class PresenceScores extends Component {
                     }
                 }
             })
-        }else{
+        }else if (this.state.mode == this.modes.TIME){
             this.setState({
                 ...this.state,
                 chartTimes: {
@@ -189,9 +193,7 @@ class PresenceScores extends Component {
 
     score = () => {
         this.setState({
-            score: true,
-            time: false,
-            details:false
+            mode: this.modes.SCORE
         }, () => {
             this.setChart();
         })
@@ -199,77 +201,60 @@ class PresenceScores extends Component {
 
     time = () => {
         this.setState({
-            score: false,
-            time: true,
-            details: false
+            mode: this.modes.TIME
         }, () => {
             this.setChart();
         })
     };
 
-    details = () => {
-        this.setState({
-            score: false,
-            time: false,
-            details: true
-        })
+    details = (event) => {
+        if(event.length!=0) {
+            if(this.props.location.state.exercise.type == 'CLOZE'){
+                this.setState({
+                    userDetailsIndex: event[0]['_index'],
+                    mode: this.modes.DETAILS
+                })
+            }
+        }
     };
+
 
     render() {
         let score_active = "";
         let time_active = "";
-        let details_active = "";
-
-        if (this.state.score == true)
-            score_active = "active";
-        else if (this.state.time == true)
-            time_active = "active";
-        else if (this.state.details == true)
-            details_active = "active";
-
-        let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
-        let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
-        let details = (<button type="button" className={"details-button " + details_active} onClick={this.details}/>);
-
-
-        const {exercise} = this.props.location.state;
-        const {shared_results} = exercise;
-        let users = [];
-        let userans = [];
-        shared_results.map((result, index) => {
-            users.push(result.user.name);
-            userans.push(result.userans);
-        });
-
         let chart = "";
 
-        if (this.state.score == true)
-            chart = (<Bar data={this.state.chartScores.chartData} options={this.state.chartScores.options}/>);
-        else if (this.state.time == true)
+        if (this.state.mode == this.modes.SCORE){
+            score_active = "active";
+            chart = (<Bar data={this.state.chartScores.chartData} getElementAtEvent={this.details} options={this.state.chartScores.options}/>);
+        }
+        else if (this.state.mode == this.modes.TIME) {
+            time_active = "active";
             chart = (<Bar data={this.state.chartTimes.chartData} options={this.state.chartTimes.options}/>);
-        else if (this.state.details == true) {
-            
-            users = users.map(function(user, index){
-                return (<th key={index}>{user}</th>);
+        }
+        else if (this.state.mode == this.modes.DETAILS) {
+            const {exercise} = this.props.location.state;
+            const {shared_results} = exercise;
+            let users = [];
+            let userans = [];
+            shared_results.map((result) => {
+                users.push(result.user.name);
+                userans.push(result.userans);
             });
-            
+
             let questions = this.props.location.state.exercise.clozeText.split(".");
             questions.splice(-1, 1);
-            let resultDetails = questions.map(function(question, index){
+            let resultDetails = questions.map((question, index) => {
                 question = question.replace("-"+(index+1)+"-", "______");
-                let eachQuestionResponses = userans.map(function(userans){
-                    return (
-                        <td>{userans[index]}</td>
-                    );
-                })
+                let response = userans[this.state.userDetailsIndex][index];
                 return (
                     <tr key={index}>
                         <td className="question-row">{question}</td>
-                        <td>{this.props.location.state.exercise.answers[index]}</td> 
-                        {eachQuestionResponses}
+                        <td>{this.props.location.state.exercise.answers[index]}</td>
+                        <td>{response}</td>
                     </tr>
                 );
-            }.bind(this));
+            });
 
             chart = (
             <div>
@@ -280,7 +265,7 @@ class PresenceScores extends Component {
                         <tr>
                             <th>Question</th>
                             <th>Correct Answer</th> 
-                            {users}
+                            <th>{users[this.state.userDetailsIndex]}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -290,6 +275,9 @@ class PresenceScores extends Component {
             </div>
             );
         }
+    
+        let score = (<button type="button" className={"score-button " + score_active} onClick={this.score}/>);
+        let time = (<button type="button" className={"time-button " + time_active} onClick={this.time}/>);
 
         return (
             <div className="container">
@@ -297,7 +285,6 @@ class PresenceScores extends Component {
                     <div className="row">
                         {score}
                         {time}
-                        {this.props.location.state.exercise.type == "CLOZE"?details:''}
                         {chart}
                     </div>
                     <div className="row button-container">
