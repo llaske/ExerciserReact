@@ -8,7 +8,7 @@ class Exercise extends Component {
 
     constructor(props) {
         super(props);
-        const {id, types} = this.props;
+        const {id} = this.props;
 
         this.state = {
             id: id,
@@ -46,9 +46,11 @@ class Exercise extends Component {
 
         let highest = 0;
         if (scores.length > 0) {
-            scores.map((score) => {
-                if (highest < score) highest = score;
-            })
+            scores.forEach(score => {
+                if (highest < score){
+                    highest = score;
+                }
+            });
         }
 
     

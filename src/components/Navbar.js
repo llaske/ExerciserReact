@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import {withRouter} from "react-router-dom";
 import '../css/Navbar.css'
@@ -8,12 +7,6 @@ import {MY_ACTIVITY,HOME, ADD_EXERCISE, STOP, NETWORK} from "../containers/trans
 
 
 class Navbar extends Component {
-
-    constructor(props){
-        super(props);
-
-        let {intl} = this.props;
-    }
 
     // redirect to new exercise template
     directToNew=()=>{

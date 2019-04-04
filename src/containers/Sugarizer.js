@@ -49,10 +49,8 @@ class Sugarizer extends Component {
         const {setExercises, setExerciseCounter, setIsHost, setIsShared, setUser} = this.props;
         activity.setup();
 
-        let currentenv;
         let temp = this;
         env.getEnvironment(function (err, environment) {
-            currentenv = environment;
 
             if(environment.user){
                 let user={
@@ -130,6 +128,9 @@ class Sugarizer extends Component {
                 if(this.isHost){
                     this.props.addSharedResult(msg.content.result);
                 }
+                break;
+            default:
+                break;
         }
     };
 
@@ -141,7 +142,6 @@ class Sugarizer extends Component {
                 shared_exercises:shared_exercises
             };
             let presence= this.presence;
-            let isHost= this.isHost;
             presence.sendMessage(presence.getSharedInfo().id, {
                 user: presence.getUserInfo(),
                 content: {
@@ -162,7 +162,6 @@ class Sugarizer extends Component {
             shared_exercises:shared_exercises
         };
         let presence= this.presence;
-        let isHost= this.isHost;
         presence.sendMessage(presence.getSharedInfo().id, {
             user: presence.getUserInfo(),
             content: {
@@ -190,7 +189,7 @@ class Sugarizer extends Component {
     };
 
     stopActivity() {
-        const {counter, exercises,setIsHost, setIsShared} = this.props;
+        const {counter, exercises } = this.props;
 
         let json = {
             counter: counter,

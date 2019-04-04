@@ -1,8 +1,7 @@
 import React, {Component} from "react"
-import {Bar, Line, Pie} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {addScore} from "../../store/actions/exercises";
 import {injectIntl} from 'react-intl';
 import {SCORES, TIME, YOUR_RESULTS} from "../translation";
 import "../../css/PresenceScores.css"

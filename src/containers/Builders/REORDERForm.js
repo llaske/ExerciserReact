@@ -156,7 +156,7 @@ class REORDERForm extends Component {
             isFormValid = false;
         }
 
-        list.map((item, i) => {
+        list.forEach((item, i) => {
             if (item === '') {
                 isFormValid = false;
             }

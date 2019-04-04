@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import "../css/UserList.css"
 
 
-class UserList extends React.Component {
+class UserList extends Component {
 
     handleStateChange=(state)=>{
         this.props.onStateChange(state)
@@ -11,7 +11,7 @@ class UserList extends React.Component {
 
 
     render () {
-        const {userList, fill, stroke, isOpen}= this.props;
+        const {userList, stroke, isOpen}= this.props;
 
         let styles = {
             bmCrossButton: {

@@ -10,14 +10,10 @@ import {
     CHOOSE,
     CLOZE_TEXT,
     MCQ,
-    REORDER_LIST, TITLE_OF_EXERCISE
+    REORDER_LIST
 } from "../translation";
 
 class Template extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     mcqSelected = () => {
         this.props.history.push('/new/mcq')
@@ -30,7 +26,7 @@ class Template extends Component {
     reorderSelected = () => {
         this.props.history.push('/new/reorder')
     };
-;
+    
     render() {
         let styles = { "backgroundColor": this.props.current_user.colorvalue ? this.props.current_user.colorvalue.stroke : "#FFFFFF" };
         return (
