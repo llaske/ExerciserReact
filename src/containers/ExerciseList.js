@@ -25,10 +25,6 @@ class ExerciseList extends Component {
         this.setState({menuOpen: !this.state.menuOpen})
     };
 
-    componentDidMount() {
-
-    }
-
     componentWillReceiveProps() {
         if (this.props.isShared && this.props.isHost) {
             this.props.onUpdate();

@@ -54,7 +54,7 @@ class CLOZEPlayer extends Component {
             // array to remove duplicate answers
             let noduplicates= [];
             
-            answers.map((ans, i)=> {
+            answers.forEach((ans, i)=> {
                 if(noduplicates.indexOf(ans)===-1){
                     noduplicates.push(ans);
                     options.push({

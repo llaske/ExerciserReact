@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+
 import { connect } from "react-redux";
 import {withRouter} from "react-router-dom";
 import '../css/Navbar.css'
@@ -7,27 +7,19 @@ import {injectIntl} from 'react-intl';
 import {MY_ACTIVITY,HOME, ADD_EXERCISE, STOP, NETWORK} from "../containers/translation";
 
 
-class Navbar extends Component {
+// redirect to new exercise template
+const directToNew = (history) =>{
+    history.push('/new');
+};
 
-    constructor(props){
-        super(props);
 
-        let {intl} = this.props;
-    }
+// redirect to home screen
+const directToHome = (history) =>{
+    history.push('/');
+};
 
-    // redirect to new exercise template
-    directToNew=()=>{
-        this.props.history.push('/new')
-    };
-
-    // redirect to home screen
-    directToHome=()=>{
-        this.props.history.push('/')
-    };
-
-    render() {
-        let {intl} = this.props;
-
+function Navbar(props){
+        let {intl} = props;
         let activityTitle= intl.formatMessage({id: MY_ACTIVITY});
         let homeTitle= intl.formatMessage({id: HOME});
         let addTitle= intl.formatMessage({id: ADD_EXERCISE});
@@ -44,12 +36,12 @@ class Navbar extends Component {
                     className="toolbutton"
                     id="home-button"
                     title={homeTitle}
-                    onClick={this.directToHome}/>
+                    onClick={directToHome.bind(null,props.history)}/>
                 <button
                     className="toolbutton"
                     id="add-button"
                     title={addTitle}
-                    onClick={this.directToNew}/>
+                    onClick={directToNew.bind(null,props.history)}/>
                 <button
                     className="toolbutton"
                     id="network-button"
@@ -58,12 +50,10 @@ class Navbar extends Component {
                     className="toolbutton pull-right"
                     id="stop-button"
                     title={stopTitle}
-                    onClick={this.props.onStop}/>
+                    onClick={props.onStop}/>
             </div>
         );
     }
-}
-
 function mapStateToProps(state) {
     return {
         exercises: state.exercises

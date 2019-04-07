@@ -4,7 +4,7 @@ The Sugarizer Exerciser Activity is an Academic focused Activity for the Sugariz
 
 ![](screenshots/screenshots.gif)
 
-This activity was developped by [Mankirat Singh](https://github.com/manki11) during GSoC 2018. 
+This activity was developped by [Mankirat Singh](https://github.com/manki11) during GSoC 2018.
 Learn more about this work on [Mankirat's blog](https://mankiratsinghtech.wordpress.com/2018/04/27/google-summer-of-code-2018/).
 
 The Exerciser Activity is written using ReactJS framework. The ReactJS source code is maintain here and, once build, the code is integrated in [Sugarizer](https://github.com/llaske/sugarizer).
@@ -22,6 +22,11 @@ npm install
 #### Setting up the development environment
 
 Copy the lib folder, inside the main directory of the project folder, into the node_modules folder (after npm install). These are dependencies required by the sugarizer platform.
+
+```bash
+mkdir node_modules/lib
+cp -r lib/* node_modules/lib
+```
 
 #### Running the project
 

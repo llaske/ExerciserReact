@@ -1,17 +1,9 @@
 import { slide as Menu } from 'react-burger-menu'
-import React, {Component} from 'react';
+import React from 'react';
 import "../css/UserList.css"
 
-
-class UserList extends React.Component {
-
-    handleStateChange=(state)=>{
-        this.props.onStateChange(state)
-    };
-
-
-    render () {
-        const {userList, fill, stroke, isOpen}= this.props;
+function UserList(props){
+        const {userList, fill, stroke, isOpen}= props;
 
         let styles = {
             bmCrossButton: {
@@ -28,7 +20,7 @@ class UserList extends React.Component {
 
         return (
             <Menu
-                onStateChange={(state) => this.handleStateChange(state)}
+                onStateChange={props.onStateChange}
                 isOpen={isOpen}
                 customBurgerIcon={false}
                 right styles={styles}
@@ -37,6 +29,5 @@ class UserList extends React.Component {
             </Menu>
         );
     }
-}
 
 export default UserList;

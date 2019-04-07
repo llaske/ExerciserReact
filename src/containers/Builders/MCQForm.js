@@ -253,7 +253,7 @@ class MCQForm extends Component {
             isFormValid = false;
         }
 
-        answers.map((ans, i) => {
+        answers.forEach((ans, i) => {
             if (ans === '') {
                 isFormValid = false;
             }

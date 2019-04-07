@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import "../../css/NewExerciseTemplate.css"
@@ -15,26 +15,25 @@ import {
     FREE_TEXT_INPUT_TEMPLATE_STRING
 } from "../translation";
 
-class Template extends Component {
+const mcqSelected = (history) => {
+    history.push('/new/mcq')
+};
 
-    mcqSelected = () => {
-        this.props.history.push('/new/mcq')
-    };
 
-    clozeSelected = () => {
-        this.props.history.push('/new/cloze')
-    };
+const clozeSelected = (history) => {
+    history.push('/new/cloze')
+};
 
-    reorderSelected = () => {
-        this.props.history.push('/new/reorder')
-    };
+const reorderSelected = (history) => {
+    history.push('/new/reorder')
+};
 
-    freeTextInputSelected = () => {
-        this.props.history.push('/new/freeTextInput')
-    };
-    
-    render() {
-        let styles = { "backgroundColor": this.props.current_user.colorvalue ? this.props.current_user.colorvalue.stroke : "#FFFFFF" };
+const freeTextInputSelected = (history) => {
+    history.push('/new/freeTextInput')
+};
+
+function Template(props) {
+        let styles = { "backgroundColor": props.current_user.colorvalue ? props.current_user.colorvalue.stroke : "#FFFFFF" };
         return (
             <div className="template-container" style={styles}>
                 <div className="col-md-10 mx-auto">
@@ -49,7 +48,7 @@ class Template extends Component {
                                     <p className="card-text">
                                         <FormattedMessage id={MCQ_TEMPLATE_STRING}/>
                                     </p>
-                                    <button className="button-choose" onClick={this.mcqSelected}>
+                                    <button className="button-choose" onClick={mcqSelected.bind(null,props.history)}>
                                         <FormattedMessage id={CHOOSE}/>
                                     </button>
                                 </div>
@@ -65,7 +64,7 @@ class Template extends Component {
                                     <p className="card-text">
                                         <FormattedMessage id={CLOZE_TEMPLATE_STRING}/>
                                     </p>
-                                    <button className="button-choose" onClick={this.clozeSelected}>
+                                    <button className="button-choose" onClick={clozeSelected.bind(null,props.history)}>
                                         <FormattedMessage id={CHOOSE}/>
                                     </button>
                                 </div>
@@ -81,7 +80,7 @@ class Template extends Component {
                                     <p className="card-text">
                                         <FormattedMessage id={REORDER_TEMPLATE_STRING}/>
                                     </p>
-                                    <button className="button-choose" onClick={this.reorderSelected}>
+                                    <button className="button-choose" onClick={reorderSelected.bind(null,props.history)}>
                                         <FormattedMessage id={CHOOSE}/>
                                     </button>
                                 </div>
@@ -97,7 +96,7 @@ class Template extends Component {
                                     <p className="card-text">
                                     <FormattedMessage id={FREE_TEXT_INPUT_TEMPLATE_STRING}/>
                                     </p>
-                                    <button className="button-choose" onClick={this.freeTextInputSelected}>
+                                    <button className="button-choose" onClick={freeTextInputSelected.bind(null,props.history)}>
                                         <FormattedMessage id={CHOOSE}/>
                                     </button>
                                 </div>
@@ -108,7 +107,6 @@ class Template extends Component {
             </div>
         );
     }
-}
 
 function mapStateToProps(state) {
     return {
