@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../css/Exercise.css'
 import {FormattedMessage} from 'react-intl';
-import {QUESTIONS, BEST_SCORE, MCQ, REORDER_LIST, CLOZE_TEXT, QUESTION_SINGULAR, PLAY, EDIT, DELETE} from "../containers/translation";
+import {QUESTIONS, BEST_SCORE, MCQ, REORDER_LIST, CLOZE_TEXT, FREE_TEXT_INPUT, QUESTION_SINGULAR, PLAY, EDIT, DELETE} from "../containers/translation";
 
 
 class Exercise extends Component {
@@ -13,7 +13,6 @@ class Exercise extends Component {
         this.state = {
             id: id,
         }
-
     }
 
     // when play button is clicked
@@ -94,6 +93,10 @@ class Exercise extends Component {
         if (type === "REORDER") {
             length = list.length;
             localized_type= REORDER_LIST;
+        }
+        if (type === "Freetext Input") {
+            length = questions.length;
+            localized_type= FREE_TEXT_INPUT;
         }
 
         let question_string=(<FormattedMessage id={QUESTIONS} values={{number: length}}/>);

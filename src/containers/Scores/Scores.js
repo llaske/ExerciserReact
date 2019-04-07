@@ -160,6 +160,9 @@ class Scores extends Component {
         if (type === 'REORDER') {
             this.props.history.push('/play/reorder', {exercise: exercise})
         }
+        if (type === "Freetext Input") {
+            this.props.history.push('/play/freetextInput', {exercise: exercise})
+        }
     };
 
     score = () => {

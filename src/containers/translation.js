@@ -14,6 +14,8 @@ export const REORDER_TEMPLATE_STRING= "Build an exercise with Jumbled Lists that
 export const CHOOSE="Choose";
 export const MCQ="MCQ";
 export const REORDER_LIST="Reorder List";
+export const FREE_TEXT_INPUT = "Freetext Input";
+export const FREE_TEXT_INPUT_TEMPLATE_STRING= "Build an exercise with questions that have textual answers.";
 
 // FORM VIEW
 
@@ -45,6 +47,9 @@ export const LIST_ERROR="List field can't be empty";
 // REORDER FORM
 export const ITEM="Item {number}";
 
+// FREE TEXT INPUT FORM
+export const ENTER_ANSWER = "Enter the Answer";
+export const ANSWER = "Answer";
 
 // PLAYER VIEW
 

@@ -50,6 +50,9 @@ class ExerciseList extends Component {
         if (exercise.type === 'REORDER') {
             this.props.history.push('/edit/reorder', {exercise: exercise})
         }
+        if (exercise.type === 'Freetext Input') {
+            this.props.history.push('/edit/freetextInput', {exercise: exercise})
+        }
     };
 
     onShare = (id, shared) => {
@@ -74,6 +77,9 @@ class ExerciseList extends Component {
         }
         if (exercise.type === 'REORDER') {
             this.props.history.push('/play/reorder', {exercise: exercise})
+        }
+        if (exercise.type === 'Freetext Input') {
+            this.props.history.push('/play/freetextInput', {exercise: exercise})
         }
     };
 

@@ -10,14 +10,12 @@ import {
     CHOOSE,
     CLOZE_TEXT,
     MCQ,
-    REORDER_LIST, TITLE_OF_EXERCISE
+    REORDER_LIST,
+    FREE_TEXT_INPUT,
+    FREE_TEXT_INPUT_TEMPLATE_STRING
 } from "../translation";
 
 class Template extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     mcqSelected = () => {
         this.props.history.push('/new/mcq')
@@ -30,7 +28,11 @@ class Template extends Component {
     reorderSelected = () => {
         this.props.history.push('/new/reorder')
     };
-;
+
+    freeTextInputSelected = () => {
+        this.props.history.push('/new/freeTextInput')
+    };
+    
     render() {
         let styles = { "backgroundColor": this.props.current_user.colorvalue ? this.props.current_user.colorvalue.stroke : "#FFFFFF" };
         return (
@@ -80,6 +82,22 @@ class Template extends Component {
                                         <FormattedMessage id={REORDER_TEMPLATE_STRING}/>
                                     </p>
                                     <button className="button-choose" onClick={this.reorderSelected}>
+                                        <FormattedMessage id={CHOOSE}/>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
+                            <div className="card">
+                                <div className="card-img-container">
+                                    <div className="card-img-top background-cloze"/>
+                                </div>
+                                <div className="card-body">
+                                    <h5 className="card-title"><FormattedMessage id={FREE_TEXT_INPUT}/></h5>
+                                    <p className="card-text">
+                                    <FormattedMessage id={FREE_TEXT_INPUT_TEMPLATE_STRING}/>
+                                    </p>
+                                    <button className="button-choose" onClick={this.freeTextInputSelected}>
                                         <FormattedMessage id={CHOOSE}/>
                                     </button>
                                 </div>

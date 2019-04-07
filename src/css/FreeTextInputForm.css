@@ -1,0 +1,95 @@
+.form-group{
+    width: 100%!important;
+}
+
+.container-fluid{
+    margin-top: 40px;
+}
+
+.submit-button{
+    margin-right: 10px;
+}
+
+.answers{
+    width: auto!important;
+    min-width: 250px;
+    display: inline-block!important;
+}
+
+div label{
+    margin-right: 10px;
+}
+
+.button-previous:before{
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 16px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-top;
+    background-color: transparent;
+    background-position : center center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-image: url("../icons/exercise/left.svg");
+}
+
+.button-previous{
+    width: 180px;
+    text-align: center;
+    align-self: center;
+    border-radius: 20px!important;
+    font-size: 15px!important;
+}
+
+
+.button-next:after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    float: right;
+    border-radius: 16px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-top;
+    background-color: transparent;
+    background-position : center center;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-image: url("../icons/exercise/right.svg");
+}
+
+.button-next{
+    width: 180px;
+    text-align: center;
+    align-self: center;
+    border-radius: 20px!important;
+    font-size: 15px!important;
+}
+
+.button-finish{
+    width: 180px;
+    text-align: center;
+    align-self: center;
+    border-radius: 20px!important;
+    font-size: 15px!important;
+}
+
+.input-freeText{
+    display: block;
+    width: 100%!important;
+    font-size: 15px;
+    padding: 6px 20px!important;
+    line-height: 22px;
+    background-color: #e5e5e5;
+    border: 2px solid #e5e5e5;
+    border-radius: 22px;
+    outline: 0;
+}
+
+.input-ans{
+    display: block;
+    font-size: 15px;
+    padding: 6px 20px!important;
+}
