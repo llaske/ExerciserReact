@@ -11,7 +11,7 @@ const sharedExercises=(state = [], action)=> {
         case ADD_SHARED_RESULT:
             return state.map((exercise, i)=>{
                 if(exercise.id=== action.result.id){
-                    let temp= exercise;
+                    const temp= {...exercise};
                     let score_added=false;
                     temp.shared_results = temp.shared_results.map((result)=>{
                         if(result.user.name === action.result.user.name){

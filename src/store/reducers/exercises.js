@@ -17,7 +17,7 @@ const exercises = (state = DEFAULT_STATE, actions) => {
         case ADD_SCORE_TIME:
             return state.map((exercise, i)=>{
                 if(exercise.id=== actions.id){
-                    let temp= exercise;
+                    const temp = {...exercise};
                     temp.scores.push(actions.score);
                     temp.times.push(actions.time);
                     return temp;
