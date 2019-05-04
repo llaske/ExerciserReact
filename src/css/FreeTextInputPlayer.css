@@ -78,7 +78,7 @@
     max-height: 30px!important;
     border-radius: 10px;
     border-width: 0;
-    min-width: 180px;
+    min-width: -webkit-fill-available;
 }
 
 .wrong{
@@ -96,4 +96,5 @@
 .freetext-div{
     width: 100%!important;
     margin-bottom: 15px;
+    min-height: max-content;
 }

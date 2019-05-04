@@ -158,6 +158,7 @@ class FreeTextInputForm extends Component {
                     
                     noOfQuestions: id,
                     currentQuestionNo: id + 1,
+                    isFormValid: false,
                     currentQuestion: {
                         id: id + 1,
                         question: '',
@@ -177,6 +178,7 @@ class FreeTextInputForm extends Component {
                         ...this.state,
                         questions: updatedQuestions,
                         currentQuestionNo: currentQuestionNo + 1,
+                        isFormValid: false,
                         currentQuestion: {
                             id: currentQuestionNo + 1,
                             question: '',
@@ -190,6 +192,7 @@ class FreeTextInputForm extends Component {
                         ...this.state,
                         questions: updatedQuestions,
                         currentQuestionNo: index + 1,
+                        isFormValid: false,
                         currentQuestion: {
                             id: index + 1,
                             question: question,
