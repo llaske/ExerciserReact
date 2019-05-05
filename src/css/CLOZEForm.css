@@ -31,7 +31,7 @@ td{
 button{
     margin-right: 10px!important;
     background-color: #808080;
-    color: white;
+    color: white!important;
     border: 2px transparent solid;
     border-radius: 22px;
     line-height: 22px;
@@ -39,6 +39,11 @@ button{
     -moz-user-select: none;
     -webkit-user-select: none;
     outline: none!important;
+}
+
+button:hover{
+    background-color: #a2a2a2!important;
+    border-color: #a2a2a2!important;
 }
 
 .up-down-button{
@@ -62,4 +67,8 @@ button{
 
 .down-button{
     background-image: url("../icons/exercise/down.svg");
+}
+
+.button-choices-add .button-choices-sub {
+    background-color: #808080!important;
 }

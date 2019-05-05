@@ -314,7 +314,6 @@ class CLOZEForm extends Component {
                                     name={`answer-${i}`}
                                     type="text"
                                     value={ans}
-                                    required
                                     placeholder={`${placeholder}`}
                                     onChange={this.handleChangeAns}/>}
                             </FormattedMessage>
@@ -358,7 +357,6 @@ class CLOZEForm extends Component {
                                                     className="input-mcq"
                                                     type="text"
                                                     id="title"
-                                                    required
                                                     value={this.state.title}
                                                     onChange={this.handleChangeTitle}
                                                 />
@@ -372,7 +370,6 @@ class CLOZEForm extends Component {
                                                     className="input-mcq"
                                                     type="text"
                                                     id="question"
-                                                    required
                                                     value={this.state.question}
                                                     onChange={this.handleChangeQues}
                                                 />
@@ -386,7 +383,6 @@ class CLOZEForm extends Component {
                                                     <input type="radio" name="writeIn"
                                                         value={"WRITEIN"}
                                                         checked={this.state.writeIn === "WRITEIN"}
-                                                        required
                                                         onChange={(e) => {
                                                             this.setState({writeIn: e.target.value})
                                                         }}/>
@@ -398,7 +394,6 @@ class CLOZEForm extends Component {
                                                     <input type="radio" name="writeIn"
                                                         value={"OPTIONS"}
                                                         checked={this.state.writeIn === "OPTIONS"}
-                                                        required
                                                         onChange={(e) => {
                                                             this.setState({writeIn: e.target.value})
                                                         }}/>
@@ -425,7 +420,6 @@ class CLOZEForm extends Component {
                                                     className="input-mcq"
                                                     rows="5"
                                                     id="cloze-text"
-                                                    required
                                                     onKeyDown={this.handleKeyDown}
                                                     onBlur={this.handleMouseDown}
                                                     value={this.state.clozeText}

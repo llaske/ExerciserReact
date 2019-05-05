@@ -44,8 +44,8 @@
 }
 
 .user:hover{
-    background-color: transparent;
-    border-color: transparent;
+    background-color: transparent!important;
+    border-color: transparent!important;
 }
 
 .user-icon{

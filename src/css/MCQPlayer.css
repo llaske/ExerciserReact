@@ -43,6 +43,7 @@
     align-self: center;
     border-radius: 20px!important;
     font-size: 15px!important;
+    background-color: #808080!important;
 }
 
 .mcq-container{
@@ -51,4 +52,9 @@
 
 .lead {
     font-weight: bold !important;
+}
+
+.btn-outline-secondary {
+    color: #6c757d!important;
+    border-color: #6c757d!important;
 }

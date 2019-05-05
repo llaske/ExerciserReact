@@ -8,14 +8,14 @@
 }
 
 .button-redo:hover{
-    background-color: limegreen;
-    border: 2px solid transparent;
+    background-color: limegreen!important;
+    border: 2px solid transparent!important;
 }
 
 button{
     margin-right: 10px!important;
     background-color: #808080;
-    color: white;
+    color: white!important;
     border: 2px solid transparent;
     border-radius: 22px;
     line-height: 22px;

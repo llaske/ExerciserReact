@@ -179,7 +179,7 @@ class FreeTextInputPlayer extends Component {
                                             if (this.state.submitted) this.finishExercise();
                                             else this.submitExercise();
                                         }}
-                                        className={"btn"}
+                                        className={"btn next-button"}
                                     >
                                     {buttonText}
                                     </button>

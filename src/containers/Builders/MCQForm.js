@@ -184,6 +184,7 @@ class MCQForm extends Component {
                         ...this.state.questions,
                         Ques
                     ],
+                    isFormValid: false,
                     noOfQuestions: id,
                     currentQuestionNo: id + 1,
                     currentQuestion: {
@@ -204,6 +205,7 @@ class MCQForm extends Component {
                     this.setState({
                         ...this.state,
                         questions: updatedQuestions,
+                        isFormValid: false,
                         currentQuestionNo: currentQuestionNo + 1,
                         currentQuestion: {
                             id: currentQuestionNo + 1,
@@ -224,6 +226,7 @@ class MCQForm extends Component {
                     this.setState({
                         ...this.state,
                         questions: updatedQuestions,
+                        isFormValid: false,
                         currentQuestionNo: index + 1,
                         currentQuestion: {
                             id: index + 1,
@@ -262,7 +265,7 @@ class MCQForm extends Component {
         this.setState({
             ...this.state,
             isFormValid: isFormValid
-        })
+        });
     };
 
     // submit exercise
@@ -334,7 +337,6 @@ class MCQForm extends Component {
                                     name={`answer-${i}`}
                                     type="text"
                                     value={ans}
-                                    required
                                     placeholder={placeholder}
                                     onChange={this.handleChangeAns}/>}
                             </FormattedMessage>
@@ -374,7 +376,6 @@ class MCQForm extends Component {
                                                 className="input-mcq"
                                                 type="text"
                                                 id="title"
-                                                required
                                                 value={this.state.title}
                                                 onChange={this.handleChangeTitle}
                                             />
@@ -388,7 +389,6 @@ class MCQForm extends Component {
                                                 className="input-mcq"
                                                 type="text"
                                                 id="question"
-                                                required
                                                 value={this.state.currentQuestion.question}
                                                 onChange={this.handleChangeQues}
                                             />

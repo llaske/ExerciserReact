@@ -41,6 +41,7 @@ div label{
     align-self: center;
     border-radius: 20px!important;
     font-size: 15px!important;
+    background-color: #808080!important;
 }
 
 
@@ -66,6 +67,7 @@ div label{
     align-self: center;
     border-radius: 20px!important;
     font-size: 15px!important;
+    background-color: #808080!important;
 }
 
 .button-finish{
@@ -73,6 +75,7 @@ div label{
     text-align: center;
     align-self: center;
     border-radius: 20px!important;
+    background-color: #808080!important;
     font-size: 15px!important;
 }
 
@@ -96,7 +99,8 @@ div label{
     text-align: center;
     background-image: url("../icons/navbar/add.svg")!important;
     background-size: contain !important;
-    background: #808080;
+    background-color: #808080!important;
+
 }
 
 .button-choices-sub{
@@ -106,5 +110,5 @@ div label{
     text-align: center;
     background-image: url("../icons/exercise/sub.svg")!important;
     background-size: contain !important;
-    background: #808080;
+    background-color: #808080!important;
 }

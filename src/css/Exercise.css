@@ -15,7 +15,7 @@
 button{
     margin-right: 10px!important;
     background-color: #808080;
-    color: white;
+    color: white!important;
     border: 2px solid transparent;
     border-radius: 22px;
     line-height: 22px;
@@ -110,24 +110,27 @@ button:disabled{
     background-color: lightgrey!important;
 }
 
-
+button:hover:disabled{
+    background-color: lightgrey!important;
+    border-color: transparent!important;
+}
 
 .play-button:hover{
-    background-color: limegreen;
-    border: 2px solid transparent;
+    background-color: limegreen!important;
+    border: 2px solid transparent!important;
 }
 
 .edit-button:hover{
-    background-color: darkorange;
-    border: 2px solid transparent;
+    background-color: darkorange!important;
+    border: 2px solid transparent!important;
 }
 
 .delete-button:hover{
-    background-color: red;
-    border: 2px solid transparent;
+    background-color: red!important;
+    border: 2px solid transparent!important;
 }
 
 .result-button:hover{
-    background-color: green;
-    border: 2px solid transparent;
+    background-color: green!important;
+    border: 2px solid transparent!important;
 }
