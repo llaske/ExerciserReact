@@ -72,7 +72,7 @@ class Exercise extends Component {
             });
         }
 
-        if(this.defaultExerciseThumbnail[title])
+        if(this.defaultExerciseThumbnail[title] && !thumbnail)
             thumbnail = this.defaultExerciseThumbnail[title];
     
         let play = (<FormattedMessage id={PLAY} defaultMessage={PLAY}>
@@ -126,7 +126,7 @@ class Exercise extends Component {
             <div className="col-md-10">
                 <div className="card">
                     <div className="card-img-container">
-                        <div className="card-img-top" style={{backgroundImage: `url(${thumbnail!==''?thumbnail:this.background[type]})`}}/>
+                        <div className="card-img-top" style={{backgroundImage: `url(${thumbnail?thumbnail:this.background[type]})`}}/>
                     </div>
                     <div className="card-body">
                         <h3 className="card-title">{title}</h3>

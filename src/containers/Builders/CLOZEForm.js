@@ -380,8 +380,10 @@ class CLOZEForm extends Component {
                 position: absolute; right: 0px; width: 50px; height: 50px; margin-top: 5px;
                 border-radius: 25px; background-position: center; background-size: contain; 
                 background-repeat: no-repeat'></button>\
-                <img src = ${thumbnail} \
-                style='height: 400px; width:600px'/>`),
+                <div style = 'text-align: center; background-color: #e5e5e5;'>\
+                    <img src = ${thumbnail} \
+                    style='height: 400px; max-width: 500px;'/> \
+                </div>`),
 			closeButton: false,
 			modalStyles: {
 				backgroundColor: "white",
