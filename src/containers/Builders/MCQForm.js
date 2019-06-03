@@ -349,18 +349,25 @@ class MCQForm extends Component {
         let {thumbnail} = this.state;
         thumbnail = (thumbnail?thumbnail:require('../../images/mcq_image.svg'));
         picoModal({
-            content: (`\
-                <button id='close-button' style='background-image: url(${require('../../icons/exercise/delete.svg')});
-                position: absolute; right: 0px; width: 50px; height: 50px; margin-top: 5px;
-                border-radius: 25px; background-position: center; background-size: contain; 
-                background-repeat: no-repeat'></button>\
-                <div style = 'text-align: center; background-color: #e5e5e5;'>\
-                    <img src = ${thumbnail} \
-                    style='height: 400px; max-width: 500px;'/> \
-                </div>`),
+            content: (
+                `<img src = ${thumbnail} \
+                    style='max-height: 100%;\
+                        max-width: 100%;\
+                        margin: auto;\
+                        left: 0;\
+                        right: 0;\
+                        top: 0;\
+                        bottom: 0;\
+                        position: absolute;'>\
+                </img>\
+                <button id='close-button' style='background-image: url(${require('../../icons/exercise/delete.svg')});\
+                        position: absolute; right: 0px; width: 50px; height: 50px; margin-top: 5px;\
+                        border-radius: 25px; background-position: center; background-size: contain; \
+                        background-repeat: no-repeat'>\
+                </button>`),
 			closeButton: false,
 			modalStyles: {
-				backgroundColor: "white",
+				backgroundColor: "#e5e5e5",
 				height: "400px",
 				width: "600px",
 				maxWidth: "90%"
