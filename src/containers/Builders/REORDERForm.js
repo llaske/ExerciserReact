@@ -45,7 +45,15 @@ class REORDERForm extends Component {
     // in case of edit load the exercise
     componentDidMount() {
         if (this.props.location.state) {
-            const {id, title, question, scores, times, list, thumbnail} = this.props.location.state.exercise;
+            const {id, title, question, scores, times, list} = this.props.location.state.exercise;
+            
+            let {thumbnail} = this.props.location.state.exercise;
+            // For default exercises
+            if(thumbnail && !thumbnail.startsWith('data:image'))
+                thumbnail = require(`../../images/defaultExerciseThumbnail/${thumbnail}`);
+            
+            console.log(thumbnail);
+            
             this.setState({
                 ...this.state,
                 id: id,

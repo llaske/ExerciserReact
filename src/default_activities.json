@@ -8,7 +8,7 @@
     "title": "Learn Roman numerals",
     "shared": false,
     "type": "REORDER",
-    "thumbnail": ""
+    "thumbnail": "numerals.jpg"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "shared": false,
     "type": "CLOZE",
     "writeIn": "WRITEIN",
-    "thumbnail": ""
+    "thumbnail": "animal.png"
   },
   {
     "id": 3,
@@ -34,7 +34,7 @@
     "shared": false,
     "type": "CLOZE",
     "writeIn": "OPTIONS",
-    "thumbnail": ""
+    "thumbnail": "conjugate.jpg"
   },
   {
     "id": 4,
@@ -93,6 +93,6 @@
     "times": [],
     "shared": false,
     "type": "MCQ",
-    "thumbnail": ""
+    "thumbnail": "world.png"
   }
 ]

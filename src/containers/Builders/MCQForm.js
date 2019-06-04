@@ -55,8 +55,14 @@ class MCQForm extends Component {
     // in case of edit load the exercise
     componentDidMount() {
         if (this.props.location.state) {
-            const {id, title, questions, scores, times, thumbnail} = this.props.location.state.exercise;
+            const {id, title, questions, scores, times} = this.props.location.state.exercise;
             const currentQuestion = questions[0];
+            
+            let {thumbnail} = this.props.location.state.exercise;
+            // For default exercises
+            if(thumbnail && !thumbnail.startsWith('data:image'))
+                thumbnail = require(`../../images/defaultExerciseThumbnail/${thumbnail}`);
+            
             this.setState({
                 ...this.state,
                 id: id,

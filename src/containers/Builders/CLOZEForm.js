@@ -62,8 +62,13 @@ class CLOZEForm extends Component {
     // in case of edit load the exercise
     componentDidMount() {
         if (this.props.location.state) {
-            const {id, title, question, scores, times, clozeText, answers, writeIn, thumbnail} = this.props.location.state.exercise;
+            const {id, title, question, scores, times, clozeText, answers, writeIn} = this.props.location.state.exercise;
             let nextBlank = answers.length + 1;
+
+            let {thumbnail} = this.props.location.state.exercise;
+            // For default exercises
+            if(thumbnail && !thumbnail.startsWith('data:image'))
+                thumbnail = require(`../../images/defaultExerciseThumbnail/${thumbnail}`);
 
             this.setState({
                 ...this.state,
