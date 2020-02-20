@@ -57,6 +57,26 @@
     width: 100%;
 }
 
+#fullscreen-button{
+    background-image: url("../icons/navbar/fullscreen.svg");
+}
+
+#unfullscreen-button{
+    background-image: url("../icons/navbar/unfullscreen.svg");
+    background-color: #282828;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 4px 0px;
+    z-index: 1000;
+    width: 49px;
+    height: 49px;
+    border-radius: 5.5px;
+    color: white;
+    position: absolute;
+    right: 57px;
+}
+
 #help-button {
     background-image: url("../icons/exercise/help.svg");
 }

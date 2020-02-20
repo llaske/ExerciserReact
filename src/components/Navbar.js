@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import '../css/Navbar.css'
 import { injectIntl } from 'react-intl';
-import { MY_ACTIVITY, HOME, ADD_EXERCISE, STOP, NETWORK, HELP, EDITOR, PLAY } from "../containers/translation";
+import { MY_ACTIVITY, HOME, ADD_EXERCISE, STOP, NETWORK, HELP, EDITOR, PLAY, FULLSCREEN, UNFULLSCREEN } from "../containers/translation";
 import Tutorial from '../components/Tutorial';
 
 class Navbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showTutorial: false
+			showTutorial: false,
+			fullScreen: false
 		}
 	}
 
@@ -45,6 +46,14 @@ class Navbar extends Component {
 		})
 	}
 
+	toggleFullscreen = () => {
+		this.setState((state)=>{
+			return {
+				fullScreen: !state.fullScreen
+			}
+		});
+	}
+
 	render() {
 		let { intl } = this.props;
 		let activityTitle = intl.formatMessage({ id: MY_ACTIVITY });
@@ -55,68 +64,89 @@ class Navbar extends Component {
 		let helpTitle = intl.formatMessage({ id: HELP });
 		let editorButton = intl.formatMessage({ id: EDITOR});
 		let playButton = intl.formatMessage({ id: PLAY});
+		let fullScreen = intl.formatMessage({ id: FULLSCREEN});
+		let unFullScreen = intl.formatMessage({ id: UNFULLSCREEN});
 
 		return (
-			<div id="main-toolbar" className="toolbar">
-				<button
+			!this.state.fullScreen? 
+				(<div id="main-toolbar" className="toolbar">
+					<button
+						className="toolbutton"
+						id="activity-button"
+						title={activityTitle} />
+					<button
+						className="toolbutton"
+						id="network-button"
+						title={networkTitle} />
+					{!this.props.inEditMode &&
+					!this.props.location.pathname.startsWith('/edit') &&
+					!this.props.location.pathname.startsWith('/play') &&
+					!this.props.location.pathname.startsWith('/scores') &&
+						<button
+							className="toolbutton"
+							id="editor-button"
+							title={editorButton}
+							onClick={this.enterEditMode} />
+					}	
+					{this.props.inEditMode &&
+						<button
+							className="toolbutton"
+							id="play-button"
+							title={playButton}
+							onClick={this.exitEditMode} />
+					}
+					{this.props.location.pathname !== '/' &&
+						<button
+							className="toolbutton"
+							id="home-button"
+							title={homeTitle}
+							onClick={this.directToHome} />
+					}
+					{!this.props.location.pathname.startsWith('/new') &&
+					!this.props.location.pathname.startsWith('/edit') &&
+					!this.props.location.pathname.startsWith('/play') &&
+					!this.props.location.pathname.startsWith('/scores') &&
+					this.props.inEditMode &&
+						<button
+							className="toolbutton"
+							id="add-button"
+							title={addTitle}
+							onClick={this.directToNew} />
+					}
+					{!this.state.fullScreen &&
+						<button
+							className="toolbutton pull-right"
+							id="fullscreen-button"
+							title={fullScreen}
+							onClick={this.toggleFullscreen} />
+					}
+					{this.state.fullScreen &&
+						<button
+							className="toolbutton pull-right"
+							id="unfullscreen-button"
+							title={unFullScreen}
+							onClick={this.toggleFullscreen} />
+					}
+					<button
+						className="toolbutton pull-right"
+						id="stop-button"
+						title={stopTitle}
+						onClick={this.props.onStop} />
+					<button
+						className="toolbutton pull-right"
+						id="help-button"
+						title={helpTitle}
+						onClick={this.startTutorial} />
+					{this.state.showTutorial &&
+						<Tutorial unmount={this.stopTutorial}
+							pathname={this.props.history.location.pathname}
+					/>}
+				</div>)
+				:(<button
 					className="toolbutton"
-					id="activity-button"
-					title={activityTitle} />
-				<button
-					className="toolbutton"
-					id="network-button"
-					title={networkTitle} />
-				{!this.props.inEditMode &&
-				!this.props.location.pathname.startsWith('/edit') &&
-				!this.props.location.pathname.startsWith('/play') &&
-				!this.props.location.pathname.startsWith('/scores') &&
-					<button
-						className="toolbutton"
-						id="editor-button"
-						title={editorButton}
-						onClick={this.enterEditMode} />
-				}	
-				{this.props.inEditMode &&
-					<button
-						className="toolbutton"
-						id="play-button"
-						title={playButton}
-						onClick={this.exitEditMode} />
-				}
-				{this.props.location.pathname !== '/' &&
-					<button
-						className="toolbutton"
-						id="home-button"
-						title={homeTitle}
-						onClick={this.directToHome} />
-				}
-				{!this.props.location.pathname.startsWith('/new') &&
-				!this.props.location.pathname.startsWith('/edit') &&
-				!this.props.location.pathname.startsWith('/play') &&
-				!this.props.location.pathname.startsWith('/scores') &&
-				this.props.inEditMode &&
-					<button
-						className="toolbutton"
-						id="add-button"
-						title={addTitle}
-						onClick={this.directToNew} />
-				}
-				<button
-					className="toolbutton pull-right"
-					id="stop-button"
-					title={stopTitle}
-					onClick={this.props.onStop} />
-				<button
-					className="toolbutton pull-right"
-					id="help-button"
-					title={helpTitle}
-					onClick={this.startTutorial} />
-				{this.state.showTutorial &&
-					<Tutorial unmount={this.stopTutorial}
-						pathname={this.props.history.location.pathname}
-					/>
-				}
-			</div>
+					id="unfullscreen-button"
+					title={unFullScreen}
+					onClick={this.toggleFullscreen} />)
 		);
 	}
 }
