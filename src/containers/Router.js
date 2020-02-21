@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 
 import ExerciseList from "./ExerciseList";
@@ -24,52 +24,79 @@ import '../css/index.css';
 import NewExerciseTemplate from "./Builders/Template";
 import PresenceScores from "./Scores/PresenceScores";
 
-const Main = props => {
+class Main extends Component {
+	
+	constructor(props){
+		super(props);
+		this.state = {
+			zoom: 100
+		}
+		this.wrapper = createRef();
+	}
 
-	const { onUpdate, onSharedResult, inEditMode } = props;
+	componentDidUpdate(){
+		if (this.props.inFullscreenMode){
+			const mainContainer = this.wrapper.current;
+			this.resizeBoard(mainContainer.offsetHeight);
+		} else {
+			if (this.state.zoom !== 100)	this.setState({zoom: 100});
+		}
+	}
 
-	return (
-		<div className="main-container">
-			<Switch>
-				<Route exact path="/" render={props => <ExerciseList onUpdate={onUpdate} inEditMode={inEditMode} {...props} />} />
-				<Route exact path="/new" render={props => <NewExerciseTemplate {...props} />} />
-				<Route exact path="/scores" render={props => <Scores onSharedResult={onSharedResult} {...props} />} />
+	resizeBoard(size){
+		let boardSize = size + this.props.inFullscreenMode?55:0;
+		const paddingPercent = 3;
+		let zoom = 100 + boardSize/size + paddingPercent;
+		if (zoom !== this.state.zoom)
+		this.setState({zoom: zoom});
+	}
 
-				{/* MCQ */}
-				<Route exact path="/new/mcq" render={props => <MCQForm {...props} />} />
-				<Route exact path="/edit/mcq" render={props => <MCQForm {...props} />} />
-				<Route exact path="/play/mcq" render={props => <MCQPlay {...props} />} />
+	render(){
+		const props = this.props;
+		const { onUpdate, onSharedResult, inEditMode } = props;
+		return (
+			<div className="main-container" ref={this.wrapper} style={{zoom: `${this.state.zoom}%`}}>
+				<Switch>
+					<Route exact path="/" render={props => <ExerciseList onUpdate={onUpdate} inEditMode={inEditMode} {...props} />} />
+					<Route exact path="/new" render={props => <NewExerciseTemplate {...props} />} />
+					<Route exact path="/scores" render={props => <Scores onSharedResult={onSharedResult} {...props} />} />
 
-				{/* CLOZE */}
-				<Route exact path="/new/cloze" render={props => <CLOZEForm {...props} />} />
-				<Route exact path="/edit/cloze" render={props => <CLOZEForm {...props} />} />
-				<Route exact path="/play/cloze" render={props => <CLOZEPlay {...props} />} />
+					{/* MCQ */}
+					<Route exact path="/new/mcq" render={props => <MCQForm {...props} />} />
+					<Route exact path="/edit/mcq" render={props => <MCQForm {...props} />} />
+					<Route exact path="/play/mcq" render={props => <MCQPlay {...props} />} />
 
-				{/* REORDER */}
-				<Route exact path="/new/reorder" render={props => <REORDERForm {...props} />} />
-				<Route exact path="/edit/reorder" render={props => <REORDERForm {...props} />} />
-				<Route exact path="/play/reorder" render={props => <REORDERPlay {...props} />} />
+					{/* CLOZE */}
+					<Route exact path="/new/cloze" render={props => <CLOZEForm {...props} />} />
+					<Route exact path="/edit/cloze" render={props => <CLOZEForm {...props} />} />
+					<Route exact path="/play/cloze" render={props => <CLOZEPlay {...props} />} />
 
-				{/* // GROUP ASSIGNMENT */}
-				<Route exact path="/new/group" render={props => <GroupAssignmentForm {...props} />} />
-				<Route exact path="/edit/group" render={props => <GroupAssignmentForm {...props} />} />
-				<Route exact path="/play/group" render={props => <GroupAssignmentPlayer {...props} />} />
+					{/* REORDER */}
+					<Route exact path="/new/reorder" render={props => <REORDERForm {...props} />} />
+					<Route exact path="/edit/reorder" render={props => <REORDERForm {...props} />} />
+					<Route exact path="/play/reorder" render={props => <REORDERPlay {...props} />} />
 
-				{/* // FREE TEXT INPUT */}
-				<Route exact path="/new/freeText" render={props => <FreeTextInputForm {...props} />} />
-				<Route exact path="/edit/freeText" render={props => <FreeTextInputForm {...props} />} />
-				<Route exact path="/play/freeText" render={props => <FreeTextInputPlayer {...props} />} />
+					{/* // GROUP ASSIGNMENT */}
+					<Route exact path="/new/group" render={props => <GroupAssignmentForm {...props} />} />
+					<Route exact path="/edit/group" render={props => <GroupAssignmentForm {...props} />} />
+					<Route exact path="/play/group" render={props => <GroupAssignmentPlayer {...props} />} />
 
-				{/* MATCHING_PAIR */}
-				<Route exact path="/new/match" render={props => <MATCHINGPAIRForm {...props} />} />
-				<Route exact path="/edit/match" render={props => <MATCHINGPAIRForm {...props} />} />
-				<Route exact path="/play/match" render={props => <MATCHINGPAIRPlayer {...props} />} />
+					{/* // FREE TEXT INPUT */}
+					<Route exact path="/new/freeText" render={props => <FreeTextInputForm {...props} />} />
+					<Route exact path="/edit/freeText" render={props => <FreeTextInputForm {...props} />} />
+					<Route exact path="/play/freeText" render={props => <FreeTextInputPlayer {...props} />} />
 
-				<Route exact path="/presence/scores" render={props => <PresenceScores {...props} />} />
+					{/* MATCHING_PAIR */}
+					<Route exact path="/new/match" render={props => <MATCHINGPAIRForm {...props} />} />
+					<Route exact path="/edit/match" render={props => <MATCHINGPAIRForm {...props} />} />
+					<Route exact path="/play/match" render={props => <MATCHINGPAIRPlayer {...props} />} />
 
-			</Switch>
-		</div>
-	)
+					<Route exact path="/presence/scores" render={props => <PresenceScores {...props} />} />
+
+				</Switch>
+			</div>
+		)
+	}
 };
 
 

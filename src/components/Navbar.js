@@ -10,8 +10,7 @@ class Navbar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showTutorial: false,
-			fullScreen: false
+			showTutorial: false
 		}
 	}
 
@@ -26,31 +25,23 @@ class Navbar extends Component {
 	};
 
 	enterEditMode = () => {
-		this.props.toggleEditMode(true)
+		this.props.toggleEditMode(true);
 	}
 
 	exitEditMode = () => {
-		this.props.toggleEditMode(false)
-		this.props.history.push('/')
+		this.props.toggleEditMode(false);
+		this.props.history.push('/');
 	}
 
 	startTutorial = () => {
 		this.setState({
 			showTutorial: true
-		})
+		});
 	}
 
 	stopTutorial = () => {
 		this.setState({
 			showTutorial: false
-		})
-	}
-
-	toggleFullscreen = () => {
-		this.setState((state)=>{
-			return {
-				fullScreen: !state.fullScreen
-			}
 		});
 	}
 
@@ -68,7 +59,7 @@ class Navbar extends Component {
 		let unFullScreen = intl.formatMessage({ id: UNFULLSCREEN});
 
 		return (
-			!this.state.fullScreen? 
+			!this.props.inFullscreenMode? 
 				(<div id="main-toolbar" className="toolbar">
 					<button
 						className="toolbutton"
@@ -113,20 +104,11 @@ class Navbar extends Component {
 							title={addTitle}
 							onClick={this.directToNew} />
 					}
-					{!this.state.fullScreen &&
-						<button
-							className="toolbutton pull-right"
-							id="fullscreen-button"
-							title={fullScreen}
-							onClick={this.toggleFullscreen} />
-					}
-					{this.state.fullScreen &&
-						<button
-							className="toolbutton pull-right"
-							id="unfullscreen-button"
-							title={unFullScreen}
-							onClick={this.toggleFullscreen} />
-					}
+					<button
+						className="toolbutton pull-right"
+						id="fullscreen-button"
+						title={fullScreen}
+						onClick={this.props.toggleFullscreen} />
 					<button
 						className="toolbutton pull-right"
 						id="stop-button"
@@ -146,10 +128,11 @@ class Navbar extends Component {
 					className="toolbutton"
 					id="unfullscreen-button"
 					title={unFullScreen}
-					onClick={this.toggleFullscreen} />)
+					onClick={this.props.toggleFullscreen} />)
 		);
 	}
 }
+
 function mapStateToProps(state) {
 	return {
 		exercises: state.exercises

@@ -48,7 +48,8 @@ class Sugarizer extends Component {
 		this.onNetworkUserChanged = this.onNetworkUserChanged.bind(this);
 
 		this.state = {
-			inEditMode: false
+			inEditMode: false,
+			inFullscreenMode: false
 		}
 	}
 
@@ -186,6 +187,14 @@ class Sugarizer extends Component {
 		});
 	};
 
+	toggleFullscreen = () => {
+		this.setState((state)=>{
+			return {
+				inFullscreenMode: !state.inFullscreenMode
+			}
+		});
+	}
+
 	onExerciseResult = (id, score, time, userAnswers) => {
 		let presence = this.presence;
 		presence.sendMessage(presence.getSharedInfo().id, {
@@ -292,11 +301,15 @@ class Sugarizer extends Component {
 			<IntlProvider locale={this.language} messages={messages[this.language]}>
 				<Router>
 					<div className="App-container">
-						<Navbar onStop={() => this.stopActivity()} 
+						<Navbar 
+						 onStop={() => this.stopActivity()}
+						 inFullscreenMode={this.state.inFullscreenMode}
+						 toggleFullscreen={this.toggleFullscreen} 
 						 inEditMode={this.state.inEditMode} 
 						 toggleEditMode={(edit) => this.toggleEditMode(edit)}
 						 />
 						<Main
+							inFullscreenMode={this.state.inFullscreenMode}
 							inEditMode={this.state.inEditMode} 
 							onUpdate={this.onExerciseUpdate}
 							onSharedResult={this.onExerciseResult}
