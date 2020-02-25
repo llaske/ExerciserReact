@@ -21,6 +21,10 @@ export const tutorialSteps = (pathname, intl) => {
 						content: [intl.formatMessage({ id: "Editor Button" }), intl.formatMessage({ id: "Press this button to enter editor mode and edit/add/delete your exercises" })]
 					},
 					{
+						selector: "#fullscreen-button",
+						content: [intl.formatMessage({ id: "Fullscreen Button" }), intl.formatMessage({ id: "Press this button to enter Fullscreen mode." })]
+					},
+					{
 						selector: "#stop-button",
 						content: [intl.formatMessage({ id: "Stop Button" }), intl.formatMessage({ id: "Press this button to stop the activity, don\"t worry your changes will be saved in the Journal." })]
 					},

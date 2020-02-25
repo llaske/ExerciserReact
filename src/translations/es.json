@@ -203,5 +203,8 @@
 	"NextShort": "Next",
 	"End": "Final",
 	"Exerciser": "Exerciser Activity",
-	"This activity is an academic focused activity for the Sugarizer platform. It provides teachers to build interactive exercises for students, using multiple templates, and share them with their students using the sugarizer-server.": "The Exerciser activity let you build interactive exercises, using multiple templates, and share these exercises with other users so they could try to solve it."
+	"This activity is an academic focused activity for the Sugarizer platform. It provides teachers to build interactive exercises for students, using multiple templates, and share them with their students using the sugarizer-server.": "The Exerciser activity let you build interactive exercises, using multiple templates, and share these exercises with other users so they could try to solve it.",
+
+	"Fullscreen Button": "Fullscreen Button",
+	"Press this button to enter Fullscreen mode.": "Press this button to enter Fullscreen mode."
 }
