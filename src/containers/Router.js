@@ -28,17 +28,23 @@ import PresenceScores from "./Scores/PresenceScores";
 const Main = (props) => {
 	const [ref, containerSize] = useDimensions();
 
-	let zoom = 100;
+	let zoom = 1;
 	if (props.inFullscreenMode){
-		let boardSize = containerSize.height + props.inFullscreenMode?55:0;
+		let boardSize = containerSize.height + (props.inFullscreenMode?55:0);
 		const paddingPercent = 3;
-		zoom = 100 + boardSize/containerSize.height + paddingPercent;
+		zoom = (boardSize/containerSize.height) + paddingPercent/100;
 	}
-	zoom = `${zoom}%`;
+	// zoom = `${zoom}%`;
 
 	const { onUpdate, onSharedResult, inEditMode } = props;
+	const mainContainerStyle = {
+		transform: `scale(${zoom}) translateY(${props.inFullscreenMode? (100/zoom - 100) : 0}%)`, 
+		width: `${props.inFullscreenMode? 100/zoom : 100}%`,
+		transformOrigin: "left top"
+	};
+
 	return (
-		<div className="main-container" ref={ref} style={{zoom: zoom}}>
+		<div className="main-container" ref={ref} style={mainContainerStyle}>
 			<Switch>
 				<Route exact path="/" render={props => <ExerciseList onUpdate={onUpdate} inEditMode={inEditMode} {...props} />} />
 				<Route exact path="/new" render={props => <NewExerciseTemplate {...props} />} />
