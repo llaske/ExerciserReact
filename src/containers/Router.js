@@ -38,9 +38,9 @@ const Main = (props) => {
 
 	const { onUpdate, onSharedResult, inEditMode } = props;
 	const mainContainerStyle = {
-		transform: `scale(${zoom}) translateY(${props.inFullscreenMode? (100/zoom - 100) : 0}%)`, 
+		transform: `scale(${zoom})`, 
 		width: `${props.inFullscreenMode? 100/zoom : 100}%`,
-		transformOrigin: "left top"
+		transformOrigin: "left center"
 	};
 
 	return (
