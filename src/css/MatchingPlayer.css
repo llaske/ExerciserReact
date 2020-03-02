@@ -46,9 +46,9 @@
     background-color: #808080!important;
 }
 
-.mcq-container{
-    margin-top: 5%!important;
-    margin-bottom: 5%!important;
+#matching-player{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .lead {

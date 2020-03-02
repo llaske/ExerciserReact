@@ -37,3 +37,13 @@ body {
     overflow-y: auto;
     flex-grow: 1;
 }
+
+#fullScreenMargin, #fullScreenPaddingMargin{
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+.fullScreenPadding, #fullScreenPaddingMargin{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

@@ -168,12 +168,22 @@ class ExerciseList extends Component {
 			)
 		}
 
+		let fullScreenStyles = {
+			nullMargin:{
+				marginTop: "4px",
+				marginBottom: "4px"
+			},
+			nullPadding: {
+				padding: "0px"
+			}
+		}
+
 		return (
 			<div className="home-container" style={styles}>
 				{userIcon}
 				{userAdmin}
-				<div className="exercise-list-container">
-					<div className="col-md-10 mx-auto">
+				<div className="exercise-list-container" style={this.props.inFullscreenMode? fullScreenStyles.nullPadding : {}}>
+					<div className="col-md-10 mx-auto" style={this.props.inFullscreenMode? fullScreenStyles.nullPadding : {}}>
 						{exercises}
 					</div>
 				</div>

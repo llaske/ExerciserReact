@@ -2,6 +2,11 @@
     background-color: gray!important;
 }
 
+#reorder-form{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 .button-thumbnail {
     background-image: url(../icons/exercise/insert-image.svg);
     background-repeat: no-repeat;

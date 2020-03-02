@@ -381,10 +381,10 @@ class REORDERForm extends Component {
 		}
 
 		return (
-			<div className="container">
+			<div className="container" id={(this.props.inFullscreenMode? "fullScreenPaddingMargin" : "reorder-form")}>
 				<div className="container-fluid">
 					<div className="row align-items-center justify-content-center">
-						<div className="col-sm-10">
+						<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")}>
 							<div>
 								<p><strong><FormattedMessage id={REORDER_LIST} /></strong></p>
 								<hr className="my-3" />

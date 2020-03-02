@@ -46,6 +46,9 @@ const matchingPairSelected = (history) => {
 
 function Template(props) {
 	let styles = { "backgroundColor": props.current_user.colorvalue ? props.current_user.colorvalue.stroke : "#FFFFFF" };
+	let fullScreenStyles = {
+		backgroundSize: "100%"
+	}
 	return (
 		<div className="template-container" style={styles}>
 			<div className="col-md-10 mx-auto">
@@ -53,7 +56,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-mcq" />
+								<div className="card-img-top background-mcq" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={MCQ} /></h5>
@@ -69,7 +72,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-cloze" />
+								<div className="card-img-top background-cloze" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={CLOZE_TEXT} /></h5>
@@ -85,7 +88,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-reorder" />
+								<div className="card-img-top background-reorder" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={REORDER_LIST} /></h5>
@@ -101,7 +104,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-group" />
+								<div className="card-img-top background-group" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={GROUP_ASSIGNMENT} /></h5>
@@ -117,7 +120,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-freetext" />
+								<div className="card-img-top background-freetext" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={FREE_TEXT_INPUT} /></h5>
@@ -133,7 +136,7 @@ function Template(props) {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-img-container">
-								<div className="card-img-top background-match" />
+								<div className="card-img-top background-match" style={props.inFullscreenMode? fullScreenStyles : {}}/>
 							</div>
 							<div className="card-body">
 								<h5 className="card-title"><FormattedMessage id={MATCHING_PAIR} /></h5>

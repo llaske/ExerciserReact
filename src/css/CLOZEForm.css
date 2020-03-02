@@ -24,8 +24,9 @@ td{
     display: block;
 }
 
-.cloze{
-    margin-bottom: 10px;
+#cloze-form{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 button{

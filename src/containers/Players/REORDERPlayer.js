@@ -232,10 +232,10 @@ class REORDERPlayer extends Component {
 		}
 
 		return (
-			<div className="container">
-				<div className="container-fluid">
+			<div className={"container" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
+				<div className="container-fluid" id={(this.props.inFullscreenMode? "fullScreenMargin" : "reorder-player")}>
 					<div className="row align-items-center justify-content-center">
-						<div className="col-sm-10">
+						<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
 							<div className="jumbotron">
 								<p className="lead">{this.state.title}</p>
 								<hr className="my-4" />

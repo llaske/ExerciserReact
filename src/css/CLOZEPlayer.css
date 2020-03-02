@@ -46,9 +46,9 @@ div{
     line-height: 1.5;
 }
 
-.cloze-container{
-    margin-top: 5%!important;
-    margin-bottom: 5%!important;
+#cloze-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 

@@ -295,10 +295,10 @@ class MCQPlayer extends Component {
 		}
 
 		return (
-			<div className="container mcq-container">
+			<div className="container" id={(this.props.inFullscreenMode? "fullScreenMargin" : "mcq-container")} >
 				<div className="row align-items-center justify-content-center">
-					<div className="col-sm-10">
-						<div className="col-md-12">
+					<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
+						<div className={"col-md-12" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
 							<div className="jumbotron">
 								<p className="lead">{this.state.title}</p>
 								<hr className="my-4" />

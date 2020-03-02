@@ -493,10 +493,10 @@ class CLOZEForm extends Component {
 		}
 
 		return (
-			<div className="container">
-				<div className="container-fluid">
+			<div className="container" id={(this.props.inFullscreenMode? "fullScreenMargin" : "cloze-form")}>
+				<div className={"container-fluid" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
 					<div className="row align-items-center justify-content-center">
-						<div className="col-sm-10">
+						<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")}>
 							<div>
 								<p><strong><FormattedMessage id={CLOZE_TEXT} /></strong></p>
 								<hr className="my-3" />
@@ -575,7 +575,7 @@ class CLOZEForm extends Component {
 										</div>
 										<div className="row">
 											<div className="form-group">
-												<div className="cloze row  justify-content-between">
+												<div className="row  justify-content-between">
 													<label htmlFor="cloze-text"><FormattedMessage id={CLOZE_TEXT} />:</label>
 													<div className="justify-content-end">
 														<button

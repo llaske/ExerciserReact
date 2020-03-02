@@ -2,8 +2,9 @@
     width: 100%!important;
 }
 
-.container-fluid{
+#matching-form{
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .submit-button{
