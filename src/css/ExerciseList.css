@@ -71,3 +71,7 @@
     height: auto;
     min-height: 100%;
 }
+
+.Exercise-List-NoPadding{
+    padding: 0px !important;
+}

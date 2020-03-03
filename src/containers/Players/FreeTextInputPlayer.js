@@ -223,7 +223,7 @@ class FreeTextInputPlayer extends Component {
 		});
 
 		return (
-			<div className="container" id={(this.props.inFullscreenMode? "fullScreenMargin" : "freeText-container")} >
+			<div className={"container" + (this.props.inFullscreenMode? " fullScreenMargin" : "")} id="freeText-container" >
 				<div className="row align-items-center justify-content-center">
 					<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >
 						<div className={"col-md-12" + (this.props.inFullscreenMode? " fullScreenPadding" : "")} >

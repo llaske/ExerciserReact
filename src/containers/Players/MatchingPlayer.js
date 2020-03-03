@@ -330,7 +330,7 @@ class MATCHING_PAIRPLAYER extends Component {
 		}
 
 		return (
-			<div className="container" id={(this.props.inFullscreenMode? "fullScreenMargin" : "matching-player")}>
+			<div className={"container" + (this.props.inFullscreenMode? " fullScreenMargin" : "")} id="matching-player">
 				<div className="row align-items-center justify-content-center">
 					<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")}>
 						<div className={"col-md-12" + (this.props.inFullscreenMode? " fullScreenPadding" : "")}>

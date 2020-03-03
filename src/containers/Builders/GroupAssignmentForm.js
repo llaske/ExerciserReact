@@ -744,7 +744,7 @@ class GroupAssignmentForm extends Component {
 		}
 
 		return (
-			<div className="container" id={(this.props.inFullscreenMode? "fullScreenMargin" : "groupAssignment-form")}>
+			<div className={"container" + (this.props.inFullscreenMode? " fullScreenMargin" : "")} id="groupAssignment-form">
 				<div className="container-fluid">
 					<div className="row align-items-center justify-content-center">
 						<div className={"col-sm-10" + (this.props.inFullscreenMode? " fullScreenPadding" : "")}>
