@@ -83,4 +83,4 @@ const MainToolbar = (props) => {
     );
 }
 
-export default injectIntl(MainToolbar);
+export default MainToolbar;
