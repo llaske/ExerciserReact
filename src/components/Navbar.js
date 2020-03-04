@@ -56,17 +56,18 @@ class Navbar extends Component {
 			stopTutorial: this.stopTutorial
 		};
 		return (
-			!this.props.inFullscreenMode? 
-				(<MainToolbar 
+			<React.Fragment>
+				<MainToolbar 
 					{...this.props}
 					{...navFunctions}
 					showTutorial = {this.state.showTutorial}
-				/>)
-				:(<button
-					className="toolbutton"
+				/>
+				<button
+					className={"toolbutton" + (!this.props.inFullscreenMode? " toolbar-hide" : "")}
 					id="unfullscreen-button"
 					title={unFullScreen}
-					onClick={this.props.toggleFullscreen} />)
+					onClick={this.props.toggleFullscreen} />
+			</React.Fragment>
 		);
 	}
 }

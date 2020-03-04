@@ -16,7 +16,7 @@ const MainToolbar = (props) => {
     let playButton = intl.formatMessage({ id: PLAY});
     let fullScreen = intl.formatMessage({ id: FULLSCREEN});
     return(
-        <div id="main-toolbar" className="toolbar">
+        <div id="main-toolbar" className={"toolbar" + (props.inFullscreenMode ? " toolbar-hide" : "")}>
             <button
                 className="toolbutton"
                 id="activity-button"

@@ -112,3 +112,7 @@
     border: 0;
     border-radius: 5.5px;
 }
+
+.toolbar-hide{
+    display: none !important;
+}
