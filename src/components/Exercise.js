@@ -73,13 +73,18 @@ class Exercise extends Component {
 			thumbnail = require(`../media/defaultExerciseThumbnail/images/${thumbnail}`);
 
 		let play = (<FormattedMessage id={PLAY} defaultMessage={PLAY}>
-			{(msg) => (<button type="button" title={msg} className="play-button" onClick={this.playExercise} />)}
+			{(msg) => (
+			<button type="button" title={msg} className="card-button play-button" onClick={this.playExercise}><img src={require("../icons/exercise/play-button.svg")} onClick={this.myfunction} /></button>
+			)}
 		</FormattedMessage>);
+
+
 		let edit = (<FormattedMessage id={EDIT} defaultMessage={EDIT}>
-			{(msg) => (<button type="button" title={msg} disabled={shared} className="edit-button" onClick={this.editExercise} />)}
+			{(msg) => (<button type="button" title={msg} disabled={shared} className="card-button edit-button" onClick={this.editExercise}> <img src={require("../icons/exercise/edit.svg")} /> </button>)}
 		</FormattedMessage>);
+
 		let cross = (<FormattedMessage id={DELETE} defaultMessage={DELETE}>
-			{(msg) => (<button type="button" title={msg} disabled={shared} className="delete-button float-right" onClick={this.deleteExercise} />)}
+			{(msg) => (<button type="button" title={msg} disabled={shared} className="card-button delete-button" onClick={this.deleteExercise}><img src={require("../icons/exercise/sub.svg")} /> </button>)}
 		</FormattedMessage>);
 
 		let share = "";
@@ -89,14 +94,14 @@ class Exercise extends Component {
 			edit = "";
 			cross = "";
 		}
-
+	
 		if (isShared && isHost) {
 			let bg = "non-shared-exercise";
 			if (shared) {
 				bg = "shared-exercise";
-				results = (<button type="button" className={"result-button"} onClick={this.result} />);
+				results = (<button type="button" className="card-button result-button" onClick={this.result}><img src={require("../icons/exercise/result.svg")} /></button>);
 			}
-			share = (<button type="button" className={"share-button " + bg} onClick={this.shareExercise} />);
+			share = (<button type="button" className={"card-button " + bg} onClick={this.shareExercise}><img src={require("../icons/navbar/zoom-neighborhood.svg")} /></button>);
 		}
 
 		let length = 0;
@@ -132,7 +137,7 @@ class Exercise extends Component {
 
 		return (
 			<div className="col-md-10">
-				<div className="card">
+				<div className="card grow" onClick={!this.props.inEditMode ? this.playExercise : undefined }>
 					<div className="card-img-container">
 						<div className="card-img-top" style={{ backgroundImage: `url(${thumbnail !== '' ? thumbnail : this.background[type]})` }} />
 					</div>
@@ -143,7 +148,7 @@ class Exercise extends Component {
 							<div className="exercise-card-question">{question_string}</div>
 							<div className="exercise-card-hiscore"><FormattedMessage id={BEST_SCORE} />: {highest}/{length}</div>
 						</span>
-						<div className="buttons">
+						<div className="buttons d-flex justify-content-around">
 						{this.props.inEditMode ?
 							<React.Fragment>
 								{edit}

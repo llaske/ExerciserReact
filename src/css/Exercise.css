@@ -20,24 +20,28 @@ button{
 button:focus{
     border-color: transparent!important;
 }
-
-.play-button{
-    width: 40px;
-    height: 40px;
-    background-image: url("../icons/exercise/play-button.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 20px;
-    cursor: pointer;
+.grow {
+        transition: 0.5s ease;
+}
+      
+.grow:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: 0.5s ease;
+        cursor: pointer;
+}
+.card-button img {
+        width: 100%;
 }
 
-.result-button{
-    width: 40px;
-    height: 40px;
-    background-image: url("../icons/exercise/result.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 20px;
+.card-button {
+        width: 40px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border-radius: 20px;
+        cursor: pointer;
 }
 
 .shared-exercise, .shared-exercise:hover{
@@ -48,16 +52,6 @@ button:focus{
 .non-shared-exercise, .non-shared-exercise:hover{
     background-color: #808080;
     border: 2px solid transparent;
-}
-
-.share-button{
-    width: 40px;
-    height: 40px;
-    background-image: url("../icons/navbar/zoom-neighborhood.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 20px;
-    cursor: pointer;
 }
 
 .exercise-card-question {
@@ -72,26 +66,6 @@ button:focus{
 
 .exercise-card-hiscore{
     margin-bottom: 20px;
-}
-
-.delete-button{
-    width: 40px;
-    height: 40px;
-    background-image: url("../icons/exercise/sub.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.edit-button{
-    width: 40px;
-    height: 40px;
-    background-image: url("../icons/exercise/edit.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 20px;
-    cursor: pointer;
 }
 
 button:disabled{
