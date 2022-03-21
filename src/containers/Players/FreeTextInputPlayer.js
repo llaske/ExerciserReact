@@ -29,7 +29,8 @@ class FreeTextInputPlayer extends Component {
 			goBackToEdit: false,
 			checkans: [],
 			userLanguage: '',
-			userAnswers: ''
+			userAnswers: '',
+			attempted: false
 		}
 		this.intervalId = setInterval(this.timer, 1000);
 	}
@@ -146,7 +147,8 @@ class FreeTextInputPlayer extends Component {
 		userans[answerId - 1] = e.target.value;
 		this.setState({
 			...this.state,
-			userans: userans
+			userans: userans,
+			attempted: true
 		});
 	}
 
@@ -242,6 +244,7 @@ class FreeTextInputPlayer extends Component {
 											else this.submitExercise();
 										}}
 										className={"btn next-button"}
+										disabled={!this.state.attempted && !this.state.submitted}
 									>
 										{buttonText}
 									</button>
