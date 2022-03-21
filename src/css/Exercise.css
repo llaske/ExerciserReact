@@ -3,6 +3,7 @@
     border-radius: 0 0 2px 2px;
     border: 1px solid rgba(160,160,160,0.2);
     margin-top: 50px;
+    transition: all 200ms ease;
 }
 
 button{
@@ -20,16 +21,11 @@ button{
 button:focus{
     border-color: transparent!important;
 }
-.grow {
-        transition: 0.5s ease;
-}
       
 .grow:hover {
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
-        transition: 0.5s ease;
-        cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	transform: scale(1.01);
+    cursor: pointer;
 }
 .card-button img {
         width: 100%;

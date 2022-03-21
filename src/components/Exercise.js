@@ -137,7 +137,7 @@ class Exercise extends Component {
 
 		return (
 			<div className="col-md-10">
-				<div className="card grow" onClick={!this.props.inEditMode ? this.playExercise : undefined }>
+				<div className="card grow">
 					<div className="card-img-container">
 						<div className="card-img-top" style={{ backgroundImage: `url(${thumbnail !== '' ? thumbnail : this.background[type]})` }} />
 					</div>
