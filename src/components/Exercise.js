@@ -132,7 +132,7 @@ class Exercise extends Component {
 
 		return (
 			<div className="col-md-10">
-				<div className="card">
+				<div className="card grow" style={{cursor:"default"}}>
 					<div className="card-img-container">
 						<div className="card-img-top" style={{ backgroundImage: `url(${thumbnail !== '' ? thumbnail : this.background[type]})` }} />
 					</div>
