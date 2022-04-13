@@ -39,6 +39,7 @@ button:focus{
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .shared-exercise, .shared-exercise:hover{
