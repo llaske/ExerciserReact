@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Exercise.css'
 import { FormattedMessage } from 'react-intl';
-import { QUESTIONS, BEST_SCORE, MCQ, REORDER_LIST, CLOZE_TEXT, GROUP_ASSIGNMENT, FREE_TEXT_INPUT, QUESTION_SINGULAR, PLAY, EDIT, DELETE, MATCHING_PAIR } from "../containers/translation";
+import { QUESTIONS, BEST_SCORE, MCQ, REORDER_LIST, CLOZE_TEXT, GROUP_ASSIGNMENT, FREE_TEXT_INPUT, QUESTION_SINGULAR, PLAY, EDIT, DELETE, MATCHING_PAIR,SHARE } from "../containers/translation";
 import cloze_background from '../media/template/cloze_image.svg'
 import mcq_background from '../media/template/mcq_image.svg'
 import reorder_background from '../media/template/list_reorder_image.svg';
@@ -96,7 +96,9 @@ class Exercise extends Component {
 				bg = "shared-exercise";
 				results = (<button type="button" className={"result-button"} onClick={this.result} />);
 			}
-			share = (<button type="button" className={"share-button " + bg} onClick={this.shareExercise} />);
+			share = (<FormattedMessage id={SHARE} defaultMessage={SHARE}>
+			{(msg) => (<button type="button" title={msg} className={"share-button " + bg} onClick={this.shareExercise} />)}
+		</FormattedMessage>);
 		}
 
 		let length = 0;

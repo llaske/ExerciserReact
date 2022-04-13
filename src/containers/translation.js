@@ -6,6 +6,7 @@ export const QUESTION_SINGULAR = "{number} Question";
 export const PLAY = "Play";
 export const EDIT = "Edit";
 export const DELETE = "Delete";
+export const SHARE = "Share";
 
 // TEMPLATE VIEW
 export const MCQ_TEMPLATE_STRING = "Build an exercise with questions and option choices.";
