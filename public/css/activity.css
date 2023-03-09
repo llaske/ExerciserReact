@@ -1,0 +1,14 @@
+input[type='text'].expand {
+    width: 100%;
+  }
+  .wrapper > .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0px;
+    padding-bottom: 3px;
+  }
+
+  textarea.expand {
+    width: 100%;
+  }
