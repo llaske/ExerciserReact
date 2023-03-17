@@ -57,14 +57,7 @@
 	},
 	{
 		"id": 2,
-		"answers": [
-			"cow",
-			"bitch",
-			"lioness",
-			"hen",
-			"mare",
-			"ewe"
-		],
+		"answers": ["cow", "bitch", "lioness", "hen", "mare", "ewe"],
 		"clozeText": "The female bull is -1-.\nThe female dog is -2-.\nThe female lion is -3-.\nThe female rooster is -4-.\nThe female stallion is -5-.\nThe female ram is -6-.",
 		"question": {
 			"type": "text",
@@ -458,5 +451,81 @@
 		"type": "FREE_TEXT_INPUT",
 		"userLanguage": "en",
 		"thumbnail": "discount.png"
+	},
+	{
+		"id": 7,
+		"title": "Word Puzzle",
+		"questions": [
+			{
+				"id": 1,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of India?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 2,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of France?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 3,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of UK?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 4,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of USA?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 5,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of Germany?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 6,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of Japan?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 7,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of China?"
+				},
+				"answer": "ans"
+			},
+			{
+				"id": 8,
+				"question": {
+					"type": "text",
+					"data": "What is the Capital of Australia?"
+				},
+				"answer": "ans"
+			}
+		],
+		"scores": [],
+		"times": [],
+		"shared": false,
+		"type": "MCQ",
+		"userLanguage": "en",
+		"thumbnail": "world.png"
 	}
 ]
