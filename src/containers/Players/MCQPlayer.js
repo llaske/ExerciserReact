@@ -196,9 +196,12 @@ class MCQPlayer extends Component {
 
 	//move to previous question
 	prevQuestion = () => {
-		const { currentQuestionNo, questions } = this.state;
+		const { currentScore, currentQuestionNo, questions } = this.state;
 		let prevQuestionNo = currentQuestionNo - 1;
-
+		let score = currentScore;
+		console.log(score);
+		score = score - 1;
+		console.log(score);
 		const prevQuestion = questions[prevQuestionNo - 1];
 		let options = prevQuestion.options;
 		this.shuffleArray(options);
@@ -211,6 +214,7 @@ class MCQPlayer extends Component {
 			selected: false,
 			selectedAns: { type: "", data: "" },
 			finish: finish,
+			currentScore: score,
 			currentQuestion: {
 				id: prevQuestion.id,
 				question: prevQuestion.question,
