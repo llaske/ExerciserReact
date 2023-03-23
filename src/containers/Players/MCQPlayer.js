@@ -8,6 +8,7 @@ import "../../css/MCQPlayer.css";
 import {
 	SUBMIT_QUESTION,
 	NEXT_QUESTION,
+	PREVIOUS,
 	FINISH_EXERCISE,
 } from "../translation";
 import { FormattedMessage } from "react-intl";
@@ -193,6 +194,33 @@ class MCQPlayer extends Component {
 		}
 	};
 
+	//move to previous question
+	prevQuestion = () => {
+		const { currentQuestionNo, questions } = this.state;
+		let prevQuestionNo = currentQuestionNo - 1;
+
+		const prevQuestion = questions[prevQuestionNo - 1];
+		let options = prevQuestion.options;
+		this.shuffleArray(options);
+		let finish = false;
+		if (prevQuestionNo === questions.length) finish = true;
+		this.setState({
+			...this.state,
+			currentQuestionNo: prevQuestionNo,
+			submitted: false,
+			selected: false,
+			selectedAns: { type: "", data: "" },
+			finish: finish,
+			currentQuestion: {
+				id: prevQuestion.id,
+				question: prevQuestion.question,
+				options: options,
+				correctAns: prevQuestion.correctAns,
+			},
+		});
+	};
+
+
 	// redirect to scores screen/ edit screen
 	finishExercise = () => {
 		const {
@@ -359,6 +387,7 @@ class MCQPlayer extends Component {
 			if (this.state.finish)
 				buttonText = <FormattedMessage id={FINISH_EXERCISE} />;
 		}
+		let prevButton = <FormattedMessage id={PREVIOUS} />;
 
 		return (
 			<div
@@ -399,19 +428,19 @@ class MCQPlayer extends Component {
 								</div>
 							</div>
 							<div className='col-md-12 choices-container'>{choices}</div>
-							<div className='d-flex flex-row-reverse'>
-								<div className='justify-content-end'>
-									<button
-										onClick={() => {
-											if (this.state.selected) this.submitQuestion();
-											else if (this.state.submitted) this.nextQuestion();
-										}}
-										className={"btn next-button"}
-										disabled={!this.state.selected && !this.state.submitted}
-									>
-										{buttonText}
-									</button>
-								</div>
+							<div className='d-flex flex-row justify-content-around'>
+								<button onClick={() => this.prevQuestion()} className={"btn previous-button"} disabled={this.state.currentQuestionNo === 1}
+								>{prevButton}</button>
+								<button
+									onClick={() => {
+										if (this.state.selected) this.submitQuestion();
+										else if (this.state.submitted) this.nextQuestion();
+									}}
+									className={"btn next-button"}
+									disabled={!this.state.selected && !this.state.submitted}
+								>
+									{buttonText}
+								</button>
 							</div>
 						</div>
 					</div>

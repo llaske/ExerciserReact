@@ -48,6 +48,16 @@
     margin-bottom: 10px;
 }
 
+.previous-button{
+    width: 180px;
+    text-align: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    border-radius: 20px!important;
+    font-size: 15px!important;
+    background-color: #808080;
+    margin-bottom: 10px;
+}
 #mcq-container{
     margin-top: 5%;
     margin-bottom: 5%;

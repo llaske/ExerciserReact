@@ -79,6 +79,7 @@ export const CORRECT_GROUP = "Correct Group";
 
 export const SUBMIT_QUESTION = "Submit Question";
 export const NEXT_QUESTION = "Next Question";
+export const PREVIOUS = "Previous";
 
 // TUTORIALS
 export const NEXT_SHORT = "NextShort";
