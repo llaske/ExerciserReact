@@ -454,77 +454,25 @@
 	},
 	{
 		"id": 7,
-		"title": "Word Puzzle",
-		"questions": [
+		"title": "POLL",
+		"question": {
+			"type": "text",
+			"data": "What is the Capital of Australia?"
+		},
+		"options": [
 			{
-				"id": 1,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of India?"
-				},
-				"answer": "ans"
+				"type": "text",
+				"data": "Canberra"
 			},
 			{
-				"id": 2,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of France?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 3,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of UK?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 4,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of USA?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 5,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of Germany?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 6,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of Japan?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 7,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of China?"
-				},
-				"answer": "ans"
-			},
-			{
-				"id": 8,
-				"question": {
-					"type": "text",
-					"data": "What is the Capital of Australia?"
-				},
-				"answer": "ans"
+				"type": "text",
+				"data": "Melbourne"
 			}
 		],
 		"scores": [],
 		"times": [],
 		"shared": false,
-		"type": "MCQ",
+		"type": "POLL",
 		"userLanguage": "en",
 		"thumbnail": "world.png"
 	}

@@ -5,95 +5,81 @@ import { addScoreTime } from "../../store/actions/exercises";
 import { updateEvaluatedExercise } from "../../store/actions/evaluation";
 import { setExerciseIndex } from "../../store/actions/sugarizer";
 // import "../../css/MCQPlayer.css";
-// import {
-// 	SUBMIT_QUESTION,
-// 	NEXT_QUESTION,
-// 	FINISH_EXERCISE,
-// } from "../translation";
+import {
+	SUBMIT_QUESTION,
+	NEXT_QUESTION,
+	FINISH_EXERCISE,
+} from "../translation";
 import { FormattedMessage } from "react-intl";
-// import meSpeak from "mespeak";
-// import withMultimedia from "../../components/WithMultimedia";
-// import { PlayerMultimediaJSX } from "../../components/MultimediaJSX";
-// import { MULTIMEDIA, setDefaultMedia } from "../../utils";
+import meSpeak from "mespeak";
+import withMultimedia from "../../components/WithMultimedia";
+import { PlayerMultimediaJSX } from "../../components/MultimediaJSX";
+import { MULTIMEDIA, setDefaultMedia } from "../../utils";
 
-class WordPuzzlePlayer extends Component {
+class POLLPlayer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			id: -1,
-			title: "",
-			questions: [],
-			noOfQuestions: 1,
-			currentQuestionNo: 1,
+			// title: "",
+			question: {},
+			options: [],
 			submitted: false,
-			selected: false,
-			selectedAns: { type: "", data: "" },
+			// selected: false,
+			selectedChoice: { type: "", data: "" },
 			scores: [],
-			times: [],
-			currentTime: 0,
-			intervalID: -1,
+			// times: [],
+			// currentTime: 0,
+			// intervalID: -1,
 			goBackToEdit: false,
-			currentScore: 0,
+			// currentScore: 0,???
 			finish: false,
 			userLanguage: "",
-			currentQuestion: {
-				id: 1,
-				question: {
-					type: "",
-					data: "",
-				},
-				options: [],
-				correctAns: { type: "", data: "" },
-			},
-			userAnswers: [],
+			// currentQuestion: {
+			// 	id: 1,
+			// 	question: {
+			// 		type: "",
+			// 		data: "",
+			// 	},
+			// 	options: [],
+			// 	correctAns: { type: "", data: "" },
+			// },
+			// userAnswers: [],
 		};
-		this.intervalId = setInterval(this.timer, 1000);
+		// this.intervalId = setInterval(this.timer, 1000);
 	}
 
 	// load the exercise from props
 	componentDidMount() {
 		if (this.props.location.state) {
-			const { id, title, questions, scores, times, userLanguage } =
+			const { id, title, question, options, scores, times, userLanguage } =
 				this.props.location.state.exercise;
 
-			let updatedQuestions = questions.map((ques) => {
-				let updatedOptions = ques.options.map((option) => {
-					return setDefaultMedia(option);
-				});
-				return {
-					...ques,
-					question: setDefaultMedia(ques.question),
-					options: updatedOptions,
-				};
+
+			let updatedOptions = options.map((option) => {
+				return setDefaultMedia(option);
 			});
-			const currentQuestion = updatedQuestions[0];
+			let updatedQuestion = setDefaultMedia(question);
+			// const currentQuestion = updatedQuestions[0];
 
 			let finish = false;
-			if (questions.length === 1) finish = true;
+			// if (questions.length === 1) finish = true;
 			let goBackToEdit = false;
 			if (this.props.location.state.edit) goBackToEdit = true;
-
-			let options = currentQuestion.options.slice();
-			this.shuffleArray(options);
 
 			this.setState(
 				{
 					...this.state,
 					id: id,
 					title: title,
-					questions: updatedQuestions,
-					noOfQuestions: questions.length,
+					question: updatedQuestion,
+					options: options,
+					// noOfQuestions: questions.length,
 					scores: scores,
 					times: times,
 					finish: finish,
 					goBackToEdit: goBackToEdit,
 					userLanguage: userLanguage,
-					currentQuestion: {
-						id: currentQuestion.id,
-						question: currentQuestion.question,
-						options: options,
-						correctAns: currentQuestion.correctAns,
-					},
 				},
 				() => {
 					if (userLanguage.startsWith("en"))
@@ -110,20 +96,20 @@ class WordPuzzlePlayer extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.intervalId);
+		// clearInterval(this.intervalId);
 	}
 
-	shuffleArray(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
-		}
-	}
+	// shuffleArray(array) {
+	// 	for (let i = array.length - 1; i > 0; i--) {
+	// 		const j = Math.floor(Math.random() * (i + 1));
+	// 		[array[i], array[j]] = [array[j], array[i]]; // eslint-disable-line no-param-reassign
+	// 	}
+	// }
 
 	choiceSelected = (choice) => {
 		if (!this.state.submitted) {
 			this.setState({
-				selectedAns: {
+				selectedChoice: {
 					type: choice.type,
 					data: choice.data,
 				},
@@ -133,17 +119,17 @@ class WordPuzzlePlayer extends Component {
 	};
 
 	// to measure time
-	timer = () => {
-		this.setState({ currentTime: this.state.currentTime + 1 });
-	};
+	// timer = () => {
+	// 	this.setState({ currentTime: this.state.currentTime + 1 });
+	// };
 
 	// submit the exercise ( calculate score and time ) show correct/ wrong ans
 	submitQuestion = () => {
-		const { currentScore, selectedAns, currentQuestion, userAnswers } =
+		const { currentScore, selectedChoice, currentQuestion, userAnswers } =
 			this.state;
 		const { correctAns } = currentQuestion;
 		let score = currentScore;
-		if (selectedAns.data === correctAns.data) {
+		if (selectedChoice.data === correctAns.data) {
 			score = score + 1;
 		}
 
@@ -151,7 +137,7 @@ class WordPuzzlePlayer extends Component {
 		updatedUserAnswers[currentQuestion.id - 1] = {
 			question: currentQuestion.question,
 			correctAns: currentQuestion.correctAns,
-			userAns: selectedAns,
+			userAns: selectedChoice,
 		};
 
 		this.setState({
@@ -181,7 +167,7 @@ class WordPuzzlePlayer extends Component {
 				currentQuestionNo: nextQuestionNo,
 				submitted: false,
 				selected: false,
-				selectedAns: { type: "", data: "" },
+				selectedChoice: { type: "", data: "" },
 				finish: finish,
 				currentQuestion: {
 					id: nextQuestion.id,
@@ -277,34 +263,34 @@ class WordPuzzlePlayer extends Component {
 	};
 
 	render() {
-		const { currentQuestion } = this.state;
+		const { question, options } = this.state;
 		const { showMedia, ShowModalWindow } = this.props;
-		const { id } = currentQuestion;
-		const questionType = currentQuestion.question.type;
-		const questionData = currentQuestion.question.data;
+		const { id } = question;
+		const questionType = question.type;
+		const questionData = question.data;
 
-		let choices = currentQuestion.options.map((option, i) => {
+		let choices = options.map((option, i) => {
 			let btn = "btn-outline-secondary";
-			if (this.state.selectedAns.data === option.data) {
+			if (this.state.selectedChoice.data === option.data) {
 				btn = "btn-selected";
 			}
-			if (this.state.submitted && this.props.evaluationMode === "") {
-				if (
-					this.state.selectedAns.data ===
-					this.state.currentQuestion.correctAns.data
-				) {
-					if (option.data === this.state.selectedAns.data) {
-						btn = "btn-success";
-					}
-				} else {
-					if (option.data === this.state.currentQuestion.correctAns.data) {
-						btn = "btn-success";
-					}
-					if (this.state.selectedAns.data === option.data) {
-						btn = "btn-danger";
-					}
-				}
-			}
+			// if (this.state.submitted && this.props.evaluationMode === "") {
+			// 	if (
+			// 		this.state.selectedChoice.data ===
+			// 		this.state.currentQuestion.correctAns.data
+			// 	) {
+			// 		if (option.data === this.state.selectedChoice.data) {
+			// 			btn = "btn-success";
+			// 		}
+			// 	} else {
+			// 		if (option.data === this.state.currentQuestion.correctAns.data) {
+			// 			btn = "btn-success";
+			// 		}
+			// 		if (this.state.selectedChoice.data === option.data) {
+			// 			btn = "btn-danger";
+			// 		}
+			// 	}
+			// }
 			let optionType = option.type;
 			let optionData = option.data;
 			return (
@@ -312,11 +298,11 @@ class WordPuzzlePlayer extends Component {
 					<input
 						type='radio'
 						className='options-radio'
-						checked={option.data === this.state.selectedAns.data}
+						checked={option.data === this.state.selectedChoice.data}
 						onChange={() => {
 							this.setState({
 								...this.state,
-								selectedAns: {
+								selectedChoice: {
 									type: option.type,
 									data: option.data,
 								},
@@ -356,8 +342,9 @@ class WordPuzzlePlayer extends Component {
 		let buttonText = <FormattedMessage id={SUBMIT_QUESTION} />;
 		if (this.state.submitted) {
 			buttonText = <FormattedMessage id={NEXT_QUESTION} />;
-			if (this.state.finish)
-				buttonText = <FormattedMessage id={FINISH_EXERCISE} />;
+			// // Xfinish
+			// if (this.state.finish)
+			// 	buttonText = <FormattedMessage id={FINISH_EXERCISE} />;
 		}
 
 		return (
@@ -436,6 +423,6 @@ export default withMultimedia(require("../../media/template/mcq_image.svg"))(
 			addScoreTime,
 			setExerciseIndex,
 			updateEvaluatedExercise,
-		})(MCQPlayer)
+		})(POLLPlayer)
 	)
 );

@@ -18,6 +18,7 @@ import REORDERPlay from "./Players/REORDERPlayer";
 import GroupAssignmentPlayer from "./Players/GroupAssignmentPlayer";
 import FreeTextInputPlayer from "./Players/FreeTextInputPlayer";
 import MATCHINGPAIRPlayer from "./Players/MatchingPlayer";
+import POLLPlayer from "./Players/POLLPlayer";
 
 import { injectIntl } from "react-intl";
 import "../css/index.css";
@@ -252,6 +253,19 @@ const Main = (props) => {
 					path='/play/match'
 					render={(props) => (
 						<MATCHINGPAIRPlayer
+							onSharedResult={onSharedResult}
+							inFullscreenMode={inFullscreenMode}
+							{...props}
+						/>
+					)}
+				/>
+
+				{/*POLL*/}
+				<Route
+					exact
+					path='/play/poll'
+					render={(props) => (
+						<POLLPlayer
 							onSharedResult={onSharedResult}
 							inFullscreenMode={inFullscreenMode}
 							{...props}

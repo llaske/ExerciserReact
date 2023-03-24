@@ -20,12 +20,15 @@ export const FREE_TEXT_INPUT_TEMPLATE_STRING =
 	"Build an exercise with questions that have answers in text format.";
 export const MATCHING_PAIR_STRING =
 	"Build an exercise to match questions with answers.";
+export const POLL_STRING =
+	"Build an exercise to poll";
 export const CHOOSE = "Choose";
 export const MCQ = "MCQ";
 export const REORDER_LIST = "Reorder List";
 export const GROUP_ASSIGNMENT = "Group Assignment";
 export const FREE_TEXT_INPUT = "Free Text Input";
 export const MATCHING_PAIR = "Matching Pair";
+export const POLL = "POLL";
 
 // FORM VIEW
 

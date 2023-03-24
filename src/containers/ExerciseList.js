@@ -137,6 +137,9 @@ class ExerciseList extends Component {
 		if (exercise.type === "MATCHING_PAIR") {
 			this.props.history.push("/play/match", { exercise: exercise });
 		}
+		if (exercise.type === "POLL") {
+			this.props.history.push("/play/poll", { exercise: exercise });
+		}
 	};
 
 	presenceResult = (id) => {

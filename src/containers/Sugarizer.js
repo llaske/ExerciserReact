@@ -607,6 +607,9 @@ class Sugarizer extends Component {
 			} else if (exercise.type === "MATCHING_PAIR") {
 				for (let index = 0; index < exercise.pairs.length; index++)
 					exercise.pairs[index] = translateItem(exercise.pairs[index]);
+			} else if (exercise.type === "POLL") {
+				translateItem(exercise.question);
+				translateItem(exercise.options);
 			}
 		}
 		// Add to Exercise list

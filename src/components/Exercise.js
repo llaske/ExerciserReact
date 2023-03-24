@@ -9,6 +9,7 @@ import {
 	CLOZE_TEXT,
 	GROUP_ASSIGNMENT,
 	FREE_TEXT_INPUT,
+	POLL,
 	QUESTION_SINGULAR,
 	PLAY,
 	EDIT,
@@ -219,6 +220,10 @@ class Exercise extends Component {
 		if (type === "MATCHING_PAIR") {
 			length = pairs.length;
 			localized_type = MATCHING_PAIR;
+		}
+		if (type === "POLL") {
+			length = this.props.options.length;
+			localized_type = POLL;
 		}
 
 		let question_string = (
