@@ -159,9 +159,9 @@ class MCQPlayer extends Component {
 			submitted: true,
 			currentScore: score,
 			userAnswers: updatedUserAnswers,
+		},() => {
+			if(this.props.evaluationMode !== '') this.nextQuestion();
 		});
-
-		if(this.props.evaluationMode !== '') this.nextQuestion();
 	};
 
 	// move to next question
