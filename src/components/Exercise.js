@@ -121,6 +121,7 @@ class Exercise extends Component {
 						disabled={shared}
 						className='edit-button'
 						onClick={this.editExercise}
+						style={{margin:"18px"}}
 					/>
 				)}
 			</FormattedMessage>
@@ -134,6 +135,7 @@ class Exercise extends Component {
 						disabled={shared}
 						className='delete-button float-right'
 						onClick={this.deleteExercise}
+						style={{margin:"18px"}}
 					/>
 				)}
 			</FormattedMessage>
