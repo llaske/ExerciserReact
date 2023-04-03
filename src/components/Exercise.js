@@ -100,31 +100,7 @@ class Exercise extends Component {
 		)
 			thumbnail = require(`../media/defaultExerciseThumbnail/images/${thumbnail}`);
 
-		let play = (
-			<FormattedMessage id={PLAY} defaultMessage={PLAY}>
-				{(msg) => (
-					<button
-						type='button'
-						title={msg}
-						className='play-button'
-						onClick={this.playExercise}
-					/>
-				)}
-			</FormattedMessage>
-		);
-		let edit = (
-			<FormattedMessage id={EDIT} defaultMessage={EDIT}>
-				{(msg) => (
-					<button
-						type='button'
-						title={msg}
-						disabled={shared}
-						className='edit-button'
-						onClick={this.editExercise}
-					/>
-				)}
-			</FormattedMessage>
-		);
+
 		let cross = (
 			<FormattedMessage id={DELETE} defaultMessage={DELETE}>
 				{(msg) => (
@@ -138,6 +114,34 @@ class Exercise extends Component {
 				)}
 			</FormattedMessage>
 		);
+
+		let play = (
+			<FormattedMessage id={PLAY} defaultMessage={PLAY}>
+				{(msg) => (
+					<button
+						type='button'
+						title={msg}
+						className='play-button'
+						onClick={this.playExercise}
+					/>
+				)}
+			</FormattedMessage>
+		);
+		
+		let edit = (
+			<FormattedMessage id={EDIT} defaultMessage={EDIT}>
+				{(msg) => (
+					<button
+						type='button'
+						title={msg}
+						disabled={shared}
+						className='edit-button'
+						onClick={this.editExercise}
+					/>
+				)}
+			</FormattedMessage>
+		);
+
 
 		let share = "";
 		let results = "";

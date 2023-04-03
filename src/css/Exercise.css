@@ -92,6 +92,7 @@ button:focus{
     background-size: contain;
     border-radius: 20px;
     cursor: pointer;
+    margin: 15px;
 }
 
 .edit-button{
@@ -102,6 +103,7 @@ button:focus{
     background-size: contain;
     border-radius: 20px;
     cursor: pointer;
+    margin: 15px;
 }
 
 button:disabled{
