@@ -53,7 +53,7 @@ const Main = (props) => {
 		<div
 			className='main-container'
 			ref={ref}
-			style={{ zoom: zoom, padding: props.inFullscreenMode && "0px" }}
+			style={{ zoom: props.location.pathname !== "/play/wordpuzzle" ? zoom : "100%", padding: props.inFullscreenMode && "0px" }}
 		>
 			<Switch>
 				<Route

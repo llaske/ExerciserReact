@@ -97,7 +97,14 @@ class MATCHING_PAIRPLAYER extends Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		if (prevProps.inFullscreenMode !== this.props.inFullscreenMode) this.repaintInstance();
+		if (prevProps.inFullscreenMode !== this.props.inFullscreenMode) {
+			this.repaintInstance();
+			const toolbarHeight = 55;
+			const padding = .03;
+			const increase = this.props.inFullscreenMode ? (toolbarHeight / window.innerHeight) + padding : 0;
+			const scale = (1 + increase).toFixed(2);
+			this.instance.setZoom(scale);
+		}
 	}
 
 	repaintInstance() {
