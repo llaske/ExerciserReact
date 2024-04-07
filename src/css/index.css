@@ -35,12 +35,8 @@ body {
 }
 
 .main-container{
-    overflow: hidden;
     overflow-y: auto;
     flex-grow: 1;
-}
-.sub-main-container{
-    transform-origin: top;
 }
 
 .fullScreenMargin, .fullScreenPaddingMargin{
